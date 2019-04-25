@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/QAPage" class="" lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="__PACKAGE_DESC__">
+    <meta name="author" content="__PACKAGE_AUTHOR__">
+
+    <title>__PACKAGE_NAME__</title>
+
+    <meta property="og:title" content="__PACKAGE_NAME__">
+    <meta property="og:description" content="__PACKAGE_DESC__">
+    <meta property="og:site_name" content="__PACKAGE_NAME__">
+    <meta property="og:type" content= "website">
+    <meta property="og:image" content="{{ url_for('static', filename='images/geld.tech_128x128.png') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="__PACKAGE_AUTHOR__">
+    <meta name="twitter:title" content="__PACKAGE_NAME__">
+    <meta name="twitter:description" content="__PACKAGE_DESC__">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="icon" sizes="192x192" href="{{ url_for('static', filename='images/geld.tech_192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/geld.tech_180x180.png') }}">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/geld.tech_144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+
+    <!-- CSS & JS files will be appended by NPM -->
+
+  </head>
+
+  <body>
+
+    <!--
+        Current layout page uses bootstrap CSS
+        Vue files uses bootstrap-vue CSS and JS to avoid conflicts with JQuery
+     -->
+
+    <!-- Page Content (auto-injected) -->
+    <div id="app"></div>
+
+    <!-- Parameters from backend to use in webapp -->
+    <script type="text/javascript">
+        window.settings = {{ settings | tojson | safe }}
+    </script>
+
+    <!-- Footer -->
+    <footer class="py-1 bg-white fixed-bottom">
+      <div class="container">
+        <p class="m-0 text-center">copyright &copy; __PACKAGE_AUTHOR__ 2019</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    {% if ga_ua_id %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_ua_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ ga_ua_id }}');
+    </script>
+    {% endif %}
+
+  </body>
+</html>
