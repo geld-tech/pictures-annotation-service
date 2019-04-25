@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Local Development
+.local_dev/
+local-dev-env/
+
 # C extensions
 *.so
 
