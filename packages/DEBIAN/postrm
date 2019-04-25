@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+echo "Post-Removal Macro"
+
+dpkg-divert --remove --package __PACKAGE_NAME__ --rename --divert /tmp/__PACKAGE_NAME__.settings.cfg __PACKAGE_DIR__/config/settings.cfg || true
+
+exit 0

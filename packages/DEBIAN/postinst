@@ -1,0 +1,60 @@
+#!/bin/sh
+set -e
+
+echo ""
+echo "Post-Installation Macro"
+
+IS_UPGRADE=false
+
+case "$1" in
+	configure)
+		# Set user permissions
+		chown -R root:www-data __PACKAGE_DIR__
+		chown -R root:www-data __PACKAGE_DIR__
+		chmod 775  __PACKAGE_DIR__/data
+
+                # Creates unique session secret
+                python -c  "import os; print os.urandom(24)" > __PACKAGE_DIR__/config/secret.uti
+
+		# If $1=configure and $2 is set, this is an upgrade
+		if [ "$2" != "" ]; then
+			IS_UPGRADE=true
+		fi
+
+		if [ "$IS_UPGRADE" = "true" ]; then
+			# Upgrading already installed package
+			if [ -f /tmp/__PACKAGE_NAME__.settings.cfg ]; then
+				echo -n "Restoring preserved local configuration ..."
+				cp -p /tmp/__PACKAGE_NAME__.settings.cfg __PACKAGE_DIR__/config/settings.cfg
+				rm -f /tmp/__PACKAGE_NAME__.settings.cfg
+				echo " OK"
+			fi
+			echo ""
+			echo -n "Restarting service..."
+			systemctl daemon-reload
+			systemctl restart __PACKAGE_NAME__-collector || true
+			systemctl restart __PACKAGE_NAME__ || true
+			echo " OK"
+			echo ""
+			echo "Service __PACKAGE_NAME__ upgraded successfully!!"
+		else
+			# Performing a fresh install of the package
+			echo -n "Installing service..."
+			systemctl daemon-reload
+			systemctl enable __PACKAGE_NAME__-collector || true
+			systemctl enable __PACKAGE_NAME__ || true
+			echo " OK"
+			echo ""
+			echo -n "Starting service..."
+			systemctl start __PACKAGE_NAME__-collector || true
+			systemctl start __PACKAGE_NAME__ || true
+			echo " OK"
+			echo ""
+			echo "Service __PACKAGE_NAME__ installed successfully!"
+			echo ""
+                        echo "Connect to the Web Interface using a browser to complete first configuration (default: http://0.0.0.0:8005)"
+		fi
+		;;
+esac
+
+exit 0

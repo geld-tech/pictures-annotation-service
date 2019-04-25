@@ -1,0 +1,6 @@
+Package: __PACKAGE_NAME__
+Version: __VERSION__
+Depends: bash, python, nginx, python-daemon, python-flask, python-httplib2, python-requests, python-sqlalchemy, gunicorn, nodejs, npm
+Architecture: all
+Maintainer: __USER__
+Description: __PACKAGE_DESC__ (build date: __DATE__)
