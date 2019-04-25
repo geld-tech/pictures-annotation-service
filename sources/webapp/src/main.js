@@ -9,17 +9,12 @@ import { Alert, Collapse, Progress, Table, Navbar } from 'bootstrap-vue/es/compo
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import { Bar, Line } from 'vue-chartjs'
-
 Vue.use(BootstrapVue)
 Vue.use(Alert)
 Vue.use(Collapse)
 Vue.use(Progress)
 Vue.use(Table)
 Vue.use(Navbar)
-
-Vue.use(Bar)
-Vue.use(Line)
 
 Vue.config.productionTip = false
 
