@@ -1,0 +1,219 @@
+##############################################################################################
+#
+# Travis CI configuration file
+# 
+# Set the required secrets in the build settings of the project:
+#   - BINTRAY_USER
+#   - BINTRAY_API_KEY
+#
+##############################################################################################
+os: linux
+dist: trusty
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - fakeroot
+    - python-flake8
+    - rpm
+    - yum-utils
+
+language: node_js
+node_js:
+  - "8"
+
+cache:
+  bundler: true
+  directories:
+    - $HOME/.npm          # NPM Packages
+    - node_modules        # NPM packages
+    - $HOME/.rvm/         # Ruby packages (e.g. Bintray)
+
+env:
+  global:
+  - PACKAGE_NAME=pictures-annotation-service
+  - PACKAGE_DESC="Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js."
+  - PACKAGE_AUTHOR=geld.tech
+  - BINTRAY_REPO_NAME_DEB=debian
+  - BINTRAY_REPO_NAME_RPM=rpm
+  - BINTRAY_LICENSE=Apache-2.0
+  - BINTRAY_DESCRIPTOR_DEB=bintray-descriptor-debian.json.in
+  - BINTRAY_DESCRIPTOR_RPM=bintray-descriptor-rpm.json.in
+  - TARGET_ARCH=noarch
+
+before_install:
+  # Export variables containing versions and filename
+  - export PACKAGE_DIR=/opt/geld/webapps/$PACKAGE_NAME
+  - export SOFTWARE_VERSION=$(cat VERSION)
+  - export RELEASE_VERSION=$TRAVIS_BUILD_NUMBER
+  - export BUILD_VERSION=$SOFTWARE_VERSION.$RELEASE_VERSION
+  - export BUILD_DATE=$(date "+%Y%m%d")
+  - export PACKAGE_VERSION=$PACKAGE_NAME-$BUILD_VERSION
+  - export PACKAGE_VERSION_DEB=$PACKAGE_VERSION.deb
+  - export PACKAGE_VERSION_RPM=$PACKAGE_NAME-$SOFTWARE_VERSION-$RELEASE_VERSION.$TARGET_ARCH.rpm
+
+  # Replace placeholders in the Debian control file and the RPM .spec file
+  - find . -type f | xargs sed -i "s/__PACKAGE_NAME__/$PACKAGE_NAME/g"
+  - find . -type f | xargs sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g"
+  - find . -type f | xargs sed -i "s/__PACKAGE_AUTHOR__/$PACKAGE_AUTHOR/g"
+  - find . -type f | xargs sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g"
+  - find . -type f | xargs sed -i "s/__SOFTWARE_VERSION__/$SOFTWARE_VERSION/g"
+  - find . -type f | xargs sed -i "s/__RELEASE_VERSION__/$RELEASE_VERSION/g"
+  - find . -type f | xargs sed -i "s/__VERSION__/$BUILD_VERSION/g"
+  - find . -type f | xargs sed -i "s/__USER__/$BINTRAY_USER/g"
+  - find . -type f | xargs sed -i "s/__DATE__/$BUILD_DATE/g"
+  - find . -type f | xargs sed -i "s.__PACKAGE_DIR__.$PACKAGE_DIR.g"
+
+install:
+  # NPM packages
+  - npm update -g npm
+  # Build Vue web application
+  - cd sources/webapp/
+  - npm install
+  - npm run lint
+  - npm audit
+  - npm run build
+  - cd ../..
+  # Flask application
+  - cd sources/server/
+  # Enforce syntax errors, undefined names, and other other potential issues with coding style
+  - flake8 . --show-source --max-line-length=239 --max-complexity=10 --statistics --count
+  - cd ../..
+  # Unit tests
+
+before_script:
+  #  DEBIAN
+  ## Create the package directories structure
+  - mkdir $PACKAGE_VERSION
+  - mkdir -p $PACKAGE_VERSION/$PACKAGE_DIR/templates/
+  - mkdir -p $PACKAGE_VERSION/$PACKAGE_DIR/static/
+  - mkdir -p $PACKAGE_VERSION/DEBIAN/
+  ## Layout the files in the directories structure
+  - rsync -a sources/files/ $PACKAGE_VERSION/
+  - rsync -a sources/server/ $PACKAGE_VERSION/$PACKAGE_DIR
+  - rsync -a sources/webapp/dist/*.html $PACKAGE_VERSION/$PACKAGE_DIR/templates/
+  - rsync -a -r sources/webapp/static/  $PACKAGE_VERSION/$PACKAGE_DIR/static/
+  - rsync -a -r sources/webapp/dist/css $PACKAGE_VERSION/$PACKAGE_DIR/static
+  - rsync -a -r sources/webapp/dist/js  $PACKAGE_VERSION/$PACKAGE_DIR/static
+  - rsync -a -r packages/DEBIAN/ $PACKAGE_VERSION/DEBIAN/
+  ## Output files and directories for debugging purpose
+  - ls -lsthRA $PACKAGE_VERSION/
+  #  RPM
+  ## Create the package directories structure
+  - mkdir -p ./$PACKAGE_NAME/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+  - mkdir -p $PACKAGE_NAME/BUILD/$PACKAGE_DIR/templates/
+  - mkdir -p $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static/
+  ## Layout the files in the directories structure
+  - rsync -a --chown=root:www-data sources/files/ $PACKAGE_NAME/BUILD/
+  - rsync -a --chown=root:www-data sources/server/ $PACKAGE_NAME/BUILD/$PACKAGE_DIR
+  - rsync -a --chown=root:www-data sources/webapp/dist/*.html $PACKAGE_NAME/BUILD/$PACKAGE_DIR/templates/
+  - rsync -a -r --chown=root:www-data sources/webapp/static/  $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static/
+  - rsync -a -r --chown=root:www-data sources/webapp/dist/css $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static
+  - rsync -a -r --chown=root:www-data sources/webapp/dist/js  $PACKAGE_NAME/BUILD/$PACKAGE_DIR/static
+  - rsync -a --chown=root:www-data packages/RPM/* $PACKAGE_NAME/
+  ## Output files and directories for debugging purpose
+  - ls -lsthRA $PACKAGE_NAME/
+
+script:
+  # Create the Debian package using fakeroot forcing ownership to root user
+  - fakeroot dpkg-deb --build $PACKAGE_VERSION
+  # Create the RPM package
+  - cd $PACKAGE_NAME
+  - rpmbuild -v -bb --target $TARGET_ARCH --define "_topdir `pwd`" --define "package_files `pwd`/BUILD/" rpm.spec
+  - cd ..
+
+after_success:
+  # Stores hashes of created package to ensure upload successful
+  - export LOCAL_SHA256=$( sha256sum $PACKAGE_VERSION_DEB | cut -d " " -f1 )
+  - 'echo "LOCAL_SHA256=$LOCAL_SHA256"'
+  # Output detail on the resulting DEBIAN package for debugging purpose
+  - dpkg --contents $PACKAGE_VERSION_DEB
+  - md5sum $PACKAGE_VERSION_DEB
+  - sha256sum $PACKAGE_VERSION_DEB
+  # Output detail on the resulting RPM package for debugging purpose
+  - rsync -a $PACKAGE_NAME/RPMS/$TARGET_ARCH/$PACKAGE_VERSION_RPM .
+  - rpm -qlpv $PACKAGE_VERSION_RPM
+  - md5sum $PACKAGE_VERSION_RPM
+  - sha256sum $PACKAGE_VERSION_RPM
+
+before_deploy:
+  # Set the packages name and details in the DEBIAN descriptor file
+  - sed -i "s/__NAME__/$PACKAGE_NAME/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__PACKAGE_AUTHOR__/$PACKAGE_AUTHOR/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME_DEB/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__SUBJECT__/$BINTRAY_SUBJECT/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" $BINTRAY_DESCRIPTOR_DEB
+  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR_DEB
+  # Set the packages name and details in the RPM descriptor file
+  - sed -i "s/__NAME__/$PACKAGE_NAME/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__PACKAGE_DESC__/$PACKAGE_DESC/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__PACKAGE_AUTHOR__/$PACKAGE_AUTHOR/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__REPO_NAME__/$BINTRAY_REPO_NAME_RPM/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__SUBJECT__/$BINTRAY_SUBJECT/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" $BINTRAY_DESCRIPTOR_RPM
+  - sed -i "s/__VERSION__/$BUILD_VERSION/g" $BINTRAY_DESCRIPTOR_RPM
+
+deploy:
+  # Upload Debian packages to Bintray
+  - provider: bintray
+    file: $BINTRAY_DESCRIPTOR_DEB
+    user: $BINTRAY_USER
+    key: $BINTRAY_API_KEY
+    skip_cleanup: true
+  # Upload RPM packages to Bintray
+  - provider: bintray
+    file: $BINTRAY_DESCRIPTOR_RPM
+    user: $BINTRAY_USER
+    key: $BINTRAY_API_KEY
+    skip_cleanup: true
+
+after_deploy:
+  # Retrieve releases list and delete old packages files
+  - sleep 60
+  # Prunes old Debian releases
+  - 'export OLD_RELEASES=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_DEB/download_file?file_path=Packages.gz | zcat | grep -A 6 "Package: $PACKAGE_NAME" | grep Version | cut -d" " -f2 | sort -V | head -n -5)'
+  - 'echo "OLD_RELEASES: $OLD_RELEASES"'
+  - >
+    for RELEASE_NUM in $OLD_RELEASES; do
+      echo "Sending API request to delete $PACKAGE_NAME version $RELEASE_NUM" ;
+      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_DEB/$PACKAGE_NAME-$RELEASE_NUM.deb ;
+      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_DEB/$PACKAGE_NAME-$RELEASE_NUM.deb.asc ;
+      sleep 5 ;
+    done
+  # Prunes old RPM releases
+  - 'export OLD_RPM_PACKAGES=$(repoquery --repofrompath=$BINTRAY_SUBJECT,https://dl.bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_RPM --repoid=$BINTRAY_SUBJECT  --search $PACKAGE_NAME | sort -V | head -n -5 | sed "s/0://g" )'
+  - 'echo "OLD_RPM_PACKAGES: $OLD_RPM_PACKAGES"'
+  - >
+    for OLD_PACKAGE in $OLD_RPM_PACKAGES; do
+      echo "Sending API request to delete $PACKAGE_NAME filename $OLD_PACKAGE" ;
+      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_RPM/$OLD_PACKAGE.rpm ;
+      curl --silent --show-error --fail -X DELETE -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/content/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_RPM/$OLD_PACKAGE.rpm.asc ;
+      sleep 5 ;
+    done
+  
+  # Add time delay to let the servers process the uploaded new version and delete old files
+  - sleep 120
+  
+  # Retrieve SHA256 sum and compare with local sum to ensure correct file uploaded (Debian repository only)
+  # (Useful to detect upload issues or problems with Bintray)
+  - export REMOTE_SHA256=$(curl -L -v --silent https://bintray.com/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_DEB/download_file?file_path=Packages.gz | zcat | grep -A 3 $PACKAGE_VERSION_DEB | grep SHA256 | cut -d" " -f2)
+  - 'echo "REMOTE_SHA256: $REMOTE_SHA256"'
+  - >
+    if [[ "$LOCAL_SHA256" != "$REMOTE_SHA256" ]]; then
+      echo "SHA256 sums don't match: $LOCAL_SHA256 vs $REMOTE_SHA256";
+      travis_terminate 1;
+    fi
+
+  # Place link to the DEBIAN file in download list
+  - |
+    curl --silent --show-error --fail\
+    -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}' \
+    -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_DEB/$PACKAGE_VERSION_DEB
+
+  # Place link to the RPM file in download list
+  - |
+    curl --silent --show-error --fail\
+    -X PUT -H "Content-Type: application/json" -d'{"list_in_downloads": true}' \
+    -u$BINTRAY_USER:$BINTRAY_API_KEY https://api.bintray.com/file_metadata/$BINTRAY_SUBJECT/$BINTRAY_REPO_NAME_RPM/$PACKAGE_VERSION_RPM
