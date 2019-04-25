@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import atexit
-import ConfigParser
-import datetime
 import os
 import sys
 import time
@@ -10,8 +8,7 @@ from daemon import runner
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from modules.Models import Base, Metrics, Server, Service
-from modules.ServiceStatus import ServiceStatus
+from modules.Models import Base, Server
 
 
 class Worker():
@@ -37,10 +34,6 @@ class Worker():
     def run(self):
         try:
             print "creating DB..."
-            # Initialise object to collect metrics
-            services_status = ServiceStatus()
-            # Connect to database
-            self.db_open(services_status.get_server_hostname())
 
             # Hold off until configuration file created
             print "Sleeping until configuration file found (%s)" % self.config_file
@@ -54,10 +47,6 @@ class Worker():
             # First metrics poll to instantiate system information
             while True:
                 # Poll and store
-                dt = datetime.datetime.utcnow()
-                services = self.get_services(self.config_file)
-                data = services_status.poll_metrics(services)
-                self.store_status(dt, data)
                 time.sleep(self.poll_interval)
         except Exception, e:
             print "Collector error: %s" % e
@@ -79,43 +68,6 @@ class Worker():
 
     def db_rollback(self):
         self.db_session.rollback()
-
-    def get_services(self, config_file):
-        services = list()
-        try:
-            config = ConfigParser.ConfigParser()
-            config.read(config_file)
-            if 'services' in config.sections():
-                for service in config.items('services'):
-                    name = service[0]
-                    url = service[1]
-                    services.append({'name': name, 'url': url})
-            return services
-        except Exception, e:
-            print "Exception while reading services from configuration: %s" % e
-            return False
-
-    def get_services_last2hours(self):
-        try:
-            now = datetime.datetime.utcnow()
-            last_2_hours = now - datetime.timedelta(hours=2)
-            self.services = self.db_session.query(Service).filter_by(server=self.server).filter(Service.timestamp >= last_2_hours.strftime('%s')).order_by(Service.id)
-        except Exception:
-            print "Error accessing services status"
-
-    def store_status(self, date_time, data):
-        try:
-            for service in data:
-                service_status = Metrics(timestamp=date_time.strftime('%s'),
-                                         latency=data[service].get('latency', -1),
-                                         available=data[service].get('reachable'),
-                                         service_name=service)
-                self.db_session.add(service_status)
-                self.db_session.commit()
-        except Exception, e:
-            print "Error storing services status: %s" % e
-        finally:
-            self.db_close()
 
 
 def is_running(pid_file):
