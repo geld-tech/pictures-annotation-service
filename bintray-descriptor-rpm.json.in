@@ -1,0 +1,28 @@
+{
+	"package": {
+		"name": "__NAME__",
+		"repo": "__REPO_NAME__",
+		"subject": "__SUBJECT__"
+	},
+	
+	"version": {
+		"name": "__VERSION__",
+		"desc": "__NAME__ __VERSION__ by __SUBJECT__",
+		"gpgSign": true
+	},
+
+	"licenses": ["__LICENSE__"],
+
+	"desc": "__PACKAGE_DESC__",
+
+	"files": [
+        {
+            "includePattern": "./(.[^/]*(\\.rpm)$)",
+            "uploadPattern": "$1"
+        }
+	],
+
+	"publish": true,
+
+	"override": false
+}
