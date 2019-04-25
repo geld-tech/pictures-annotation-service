@@ -1,0 +1,15 @@
+[Unit]
+Description=Worker Daemon associated with the service __PACKAGE_NAME__
+After=__PACKAGE_NAME__.service
+
+[Service]
+Type=simple
+User=root
+Group=www-data
+WorkingDirectory=__PACKAGE_DIR__
+ExecStart=__PACKAGE_DIR__/worker.py start
+ExecStop=__PACKAGE_DIR__/worker.py stop
+TimeoutStartSec=10
+
+[Install]
+WantedBy=__PACKAGE_NAME__.service

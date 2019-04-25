@@ -1,0 +1,14 @@
+[Unit]
+Description=__PACKAGE_DESC__
+After=syslog.target network.target
+Wants=__PACKAGE_NAME__-worker.service
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=__PACKAGE_DIR__
+ExecStart=/usr/bin/gunicorn --workers 3 --bind 0.0.0.0:8006 --keep-alive 75 -m 007 application:app
+
+[Install]
+WantedBy=multi-user.target
+
