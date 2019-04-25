@@ -25,7 +25,7 @@
                     <p>Incorrect setup step</p>
                 </div>
             </div>
-            <div class="float-right" v-else>
+            <div class="float-right">
               <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1" id="defaultBackButton">Back</b-button>
               <b-button variant="primary"
                 v-on:click="nextStep"
@@ -45,7 +45,6 @@ import { deauthenticate } from '@/api'
 import SetupFirstPage from '@/components/SetupFirstPage'
 import SetupPassword from '@/components/SetupPassword'
 import SetupGanalytics from '@/components/SetupGanalytics'
-import SetupServices from '@/components/SetupServices'
 
 export default {
   name: 'Setup',
