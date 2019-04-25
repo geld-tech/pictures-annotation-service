@@ -6,7 +6,6 @@
 import ast
 import base64
 import ConfigParser
-import datetime
 import logging
 import logging.handlers
 import os
@@ -14,7 +13,6 @@ import sys
 from codecs import encode
 from functools import wraps
 from optparse import OptionParser
-from urlparse import urlparse
 
 from flask import Flask, jsonify, render_template, request, session
 from sqlalchemy import create_engine
@@ -45,8 +43,6 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.secret_key = secret_key
 app.debug = True
-
-service_status = ServiceStatus()
 
 # DB Session
 db_path = local_path+'/data/metrics.sqlite3'
@@ -96,14 +92,11 @@ def status():
         datasets = []
         time_labels = []
         xaxis_labels = []
-        colors = colors_generator()
 
         offset = 1  # GMT+1 as Default Timezone offset
         if request.headers.get('offset'):
             offset = int(request.headers.get('offset'))
-
-        now = datetime.datetime.utcnow()
-        last_hour = now - datetime.timedelta(hours=1)
+        logger.debug("Timezone offeset: %s" % offset)
 
         return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
@@ -247,8 +240,6 @@ def store_ua_id(ua_id):
         return True
     except Exception:
         return False
-
-
 
 
 @app.route("/setup/config/", methods=['GET'], strict_slashes=False)
