@@ -53,6 +53,9 @@ else
     # Creates unique session secret
     python -c  "import os; print os.urandom(24)" > __PACKAGE_DIR__/config/secret.uti
 
+    # Install required dependencies
+    pip install --no-cache-dir --upgrade h5py pydot_ng keras
+
     # Performing a fresh install of  the package
     echo -n "Installing service..."
     systemctl daemon-reload
