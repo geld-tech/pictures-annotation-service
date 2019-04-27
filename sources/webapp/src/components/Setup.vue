@@ -25,6 +25,10 @@
                     <p>Incorrect setup step</p>
                 </div>
             </div>
+            <div class="float-right" v-if="ganalyticsIdSet">
+              <b-button variant="primary" id="backButton" disabled>Back</b-button>
+              <b-button variant="primary" v-on:click="startApplication" id="startButton" autofocus>Start</b-button>
+            </div>
             <div class="float-right">
               <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1" id="defaultBackButton">Back</b-button>
               <b-button variant="primary"
