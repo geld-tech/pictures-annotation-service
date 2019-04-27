@@ -20,6 +20,7 @@
                     <div v-if="datasets">
                         <div>
                             <b-form-file v-model="file" v-bind:state="Boolean(file)"
+                              accept="image/*"
                               placeholder="Choose a file..."
                               drop-placeholder="Drop file here..."></b-form-file>
                             <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
