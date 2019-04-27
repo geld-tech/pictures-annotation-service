@@ -29,7 +29,7 @@
               <b-button variant="primary" id="backButton" disabled>Back</b-button>
               <b-button variant="primary" v-on:click="startApplication" id="startButton" autofocus>Start</b-button>
             </div>
-            <div class="float-right">
+            <div class="float-right" v-else>
               <b-button variant="primary" v-on:click="previousStep" v-bind:disabled="nowStep == 1" id="defaultBackButton">Back</b-button>
               <b-button variant="primary"
                 v-on:click="nextStep"
