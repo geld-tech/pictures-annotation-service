@@ -58,7 +58,7 @@ export default {
   data () {
     return {
       nowStep: 1,
-      stepList: ['First Setup', 'Admin Password', 'Google Analytics', 'Services'],
+      stepList: ['First Setup', 'Admin Password', 'Google Analytics'],
       stepperStyle: 'style2',
       stepperColor: '#0079FB',
       dismissCountDown: 0,
