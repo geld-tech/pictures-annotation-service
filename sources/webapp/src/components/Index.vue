@@ -19,10 +19,10 @@
                 <b-col sm="12">
                     <div v-if="datasets">
                         <div>
-                            <status v-bind:data="data"
-                                    v-bind:datasets="datasets"
-                                    v-bind:labels="labels">
-                            </status>
+                            <b-form-file v-model="file" v-bind:state="Boolean(file)"
+                              placeholder="Choose a file..."
+                              drop-placeholder="Drop file here..."></b-form-file>
+                            <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
                         </div>
                     </div>
                 </b-col>
@@ -41,6 +41,11 @@
 export default {
   name: 'Info',
   props: ['loading', 'data', 'datasets', 'labels'],
+  data() {
+    return {
+      file: null
+    }
+  }
 }
 </script>
 
