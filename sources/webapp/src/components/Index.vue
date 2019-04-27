@@ -16,15 +16,13 @@
                 </b-col>
             </b-row>
             <b-row align-v="start" align-h="around">
-                <b-col sm="12">
-                    <div v-if="datasets">
-                        <div>
-                            <b-form-file v-model="file" v-bind:state="Boolean(file)"
-                              accept="image/*"
-                              placeholder="Choose a file..."
-                              drop-placeholder="Drop file here..."></b-form-file>
-                            <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
-                        </div>
+                <b-col sm="10">
+                    <div>
+                        <b-form-file v-model="file" v-bind:state="Boolean(file)"
+                          accept="image/*"
+                          placeholder="Choose a file..."
+                          drop-placeholder="Drop file here..."></b-form-file>
+                        <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
                     </div>
                 </b-col>
             </b-row>
@@ -41,7 +39,7 @@
 <script>
 export default {
   name: 'Info',
-  props: ['loading', 'data', 'datasets', 'labels'],
+  props: ['loading', 'data', 'labels'],
   data() {
     return {
       file: null
