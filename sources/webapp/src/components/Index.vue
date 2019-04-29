@@ -18,7 +18,8 @@
             <b-row align-v="start" align-h="around">
                 <b-col sm="10">
                     <div>
-                        <b-form-file v-model="file" v-bind:state="Boolean(file)"
+                        <b-form-file multiple
+                          v-model="file" v-bind:state="Boolean(file)"
                           accept="image/*"
                           placeholder="Choose a file..."
                           drop-placeholder="Drop file here..."></b-form-file>
