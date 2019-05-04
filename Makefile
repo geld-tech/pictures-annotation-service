@@ -17,6 +17,9 @@ HOST=0.0.0.0
 PORT=5000
 WAIT=10
 
+# Conditional Processing
+NPM_AUDIT=true
+
 ## Run all targets locally
 all: stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
 	@echo "Build completed successfully!"
@@ -69,7 +72,7 @@ test-ui:
 	ls tests/uiTest*.py | xargs -i python {} --proto=$(PROTO) --host=$(HOST) --port=$(PORT) --delay=$(WAIT)
 
 ## Prepare local development environment
-local-dev-env:
+local-dev-env: clean
 	$(call echo_title, "LOCAL DEV ENV")
 	@echo "== Prepare folders =="
 	mkdir -p $(LOCAL_DEV_ENV)
@@ -115,8 +118,15 @@ npm-audit: npm-install
 	#	/bin/rm /etc/yum.repos.d/nodesource*
 	#	/usr/bin/curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 	#
-	$(call echo_title, "NPM AUDIT")  # Run conditionally as not installed on all systems
-	cd $(NPM_DEV_ENV) ; npm audit    # NPM Audit introduced in npm 6
+	# Conditionally as not installed on all systems, and can fail due to unresolved vulnerabilities
+	# NPM Audit introduced in npm 6
+	$(call echo_title, "NPM AUDIT")
+	@if [ "$(NPM_AUDIT)" == "true" ]; then \
+		cd $(NPM_DEV_ENV) ; \
+		npm audit ; \
+	else \
+		echo "Bypassing audit.." ; \
+	fi
 
 ## Runs a full build using NPM
 npm-build: npm-install
