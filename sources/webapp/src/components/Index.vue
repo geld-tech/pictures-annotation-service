@@ -23,7 +23,6 @@
                              </b-badge>
                            </template>
                         </b-form-file>
-                        <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
                     </div>
                 </b-col>
             </b-row>
