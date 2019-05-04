@@ -28,7 +28,7 @@
             </b-row>
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
-                    <hr />
+                    <br />
                 </b-col>
             </b-row>
         </div>
