@@ -2,19 +2,12 @@
   <div class="index">
     <!-- Container -->
     <b-container class="bv-example-row">
+        <h2 id="header">Picture Annotation Service</h2>
         <div v-if="loading" class="loading">
             <h6>Loading...</h6>
             <img src="/static/images/spinner.gif" width="32" height="32"/>
         </div>
         <div v-else>
-            <b-row align-v="start" align-h="around">
-                <b-col sm="4">
-                    <h5 id="header">Picture Annotation</h5>
-                </b-col>
-                <b-col sm="8">
-                    <p></p>
-                </b-col>
-            </b-row>
             <b-row align-v="start" align-h="around">
                 <b-col sm="10">
                     <div>
