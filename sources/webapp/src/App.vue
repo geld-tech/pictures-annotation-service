@@ -24,18 +24,15 @@
 </template>
 
 <script>
-import { fetchData } from '@/api'
-
 export default {
   name: 'App',
   data() {
     return {
       data: {},
+      loading: false,
       labels: [],
       dismissCountDown: 0,
       error: '',
-      loading: false,
-      refreshInterval: 0,
       show: true
     }
   },
@@ -43,37 +40,9 @@ export default {
     var firstSetup = window.settings.firstSetup
     if (firstSetup) {
       this.$router.push('/Setup')
-    } else {
-      this.loading = false
-      /* Trick to reset/clear native browser form validation state */
-      this.data = {}
-      this.labels = []
-      this.show = false
-      this.$nextTick(() => { this.show = true })
-      /* Fetching the data */
-      this.loading = true
-      this.fetchResourcesData()
-      /* Sets interval for auto-refresh */
-      this.refreshInterval = window.setInterval(this.fetchResourcesData, 15000)
-      }
-  },
-  beforeDestroy() {
-    window.clearInterval(this.refreshInterval)
+    }
   },
   methods: {
-    fetchResourcesData() {
-      this.loading = true
-      fetchData()
-        .then(response => {
-          this.data = response.data
-          this.labels = response.labels
-          this.loading = false
-        })
-        .catch(err => {
-          this.error = err.message
-          this.loading = false
-        })
-    },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
     }
