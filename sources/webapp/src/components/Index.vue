@@ -11,7 +11,9 @@
             <b-row align-v="start" align-h="around">
                 <b-col sm="10">
                     <div>
-                        <b-form-file multiple v-model="file" v-bind:state="Boolean(file)" accept="image/*" placeholder="Choose a file..." drop-placeholder="Drop file here...">
+                        <b-form-file multiple accept="image/*"
+                                v-model="file" v-bind:state="Boolean(file)"
+                                placeholder="Choose a file..." drop-placeholder="Drop file here...">
                            <template slot="file-name" slot-scope="{ names }">
                              <b-badge variant="dark">{{ names[0] }}</b-badge>
                              <b-badge v-if="names.length > 1" variant="dark" class="ml-1"> + {{ names.length - 1 }} More files</b-badge>
