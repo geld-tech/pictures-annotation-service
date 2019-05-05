@@ -11,9 +11,9 @@ export function postPayload(url, payload) {
   return axios.post(url, payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
-export function postFiles(files) {
+export function postFiles(formData) {
   axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
-  return axios.post('/upload/', files).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.post('/upload/', formData).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function storeAdminPassword(password) {

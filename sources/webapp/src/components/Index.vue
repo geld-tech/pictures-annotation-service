@@ -57,7 +57,9 @@ export default {
     onSubmit(evt) {
       evt.preventDefault()
       if (this.files) {
-        postFiles(this.files)
+        let formData = new FormData()
+        formData.append('files', this.files)
+        postFiles(formData)
           .then(() => {
             this.$refs['files-input'].reset()
           })
