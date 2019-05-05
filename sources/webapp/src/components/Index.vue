@@ -8,20 +8,28 @@
             <img src="/static/images/spinner.gif" width="32" height="32"/>
         </div>
         <div v-else>
-            <b-row align-v="start" align-h="around">
-                <b-col sm="10">
-                    <div>
-                        <b-form-file multiple accept="image/*"
-                                v-model="file" v-bind:state="Boolean(file)"
-                                placeholder="Choose files..." drop-placeholder="Drop files here..." browse-text="Browse">
-                           <template slot="file-name" slot-scope="{ names }">
-                             <b-badge variant="dark">{{ names[0] }}</b-badge>
-                             <b-badge v-if="names.length > 1" variant="dark" class="ml-1"> + {{ names.length - 1 }} More files</b-badge>
-                           </template>
-                        </b-form-file>
-                    </div>
-                </b-col>
-            </b-row>
+            <b-form @submit="onSubmit" @reset="onReset" id="uaid">
+                  <b-row align-v="start" align-h="around">
+                      <b-col sm="10">
+                          <div>
+                              <b-form-file multiple accept="image/*"
+                                      v-model="file" v-bind:state="Boolean(file)"
+                                      placeholder="Choose files..." drop-placeholder="Drop files here..." browse-text="Browse">
+                                 <template slot="file-name" slot-scope="{ names }">
+                                   <b-badge variant="dark">{{ names[0] }}</b-badge>
+                                   <b-badge v-if="names.length > 1" variant="dark" class="ml-1"> + {{ names.length - 1 }} More files</b-badge>
+                                 </template>
+                              </b-form-file>
+                          </div>
+                      </b-col>
+                  </b-row>
+                  <b-row class="my-1">
+                    <b-col sm="12">
+                      <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="uaidClearButton">Clear</b-button>
+                      <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="uaidAdminButton">Submit</b-button>
+                    </b-col>
+                  </b-row>
+            </b-form>
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
                     <br />
@@ -40,6 +48,14 @@ export default {
     return {
       file: null
     }
+  },
+  methods: {
+    onSubmit(evt) {
+      evt.preventDefault()
+    },
+    onReset(evt) {
+      evt.preventDefault()
+      this.$refs['file-input'].reset()
   }
 }
 </script>

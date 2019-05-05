@@ -15,9 +15,9 @@ from functools import wraps
 from optparse import OptionParser
 
 from flask import Flask, jsonify, render_template, request, session
-from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from werkzeug.utils import secure_filename
 
 from modules.Models import Base
 
