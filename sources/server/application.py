@@ -26,6 +26,7 @@ config_file = local_path+'/config/settings.cfg'
 secret_file = local_path+'/config/secret.uti'
 upload_dir = local_path+'/data/'
 types_list = set(['ico', 'png', 'jpg', 'jpeg', 'gif'])
+max_length = 8*1024*1024  # 8 MB
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
@@ -43,6 +44,7 @@ else:
 # Flask Initialisation
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = upload_dir
+app.config['MAX_CONTENT_LENGTH'] = max_length
 app.url_map.strict_slashes = False
 app.secret_key = secret_key
 app.debug = True
