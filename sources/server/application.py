@@ -26,7 +26,7 @@ local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
 secret_file = local_path+'/config/secret.uti'
 upload_dir = local_path+'/data/'
-types_list = set(['ico', 'png', 'jpg', 'jpeg', 'gif'])
+types_list = set(['bmp', 'ico', 'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'])
 max_length = 8*1024*1024  # 8 MB
 
 # Initialisation
