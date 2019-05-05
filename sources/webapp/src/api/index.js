@@ -11,7 +11,11 @@ export function postPayload(url, payload) {
   return axios.post(url, payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
-export function postFiles(formData) {
+export function postFiles(files) {
+  var formData = new FormData()
+  for (var i = 0; i < files.length; i++) {
+    formData.append('files', files[i]);
+  }
   axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
   return axios.post('/upload/', formData).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
