@@ -279,8 +279,6 @@ def obfuscate(text, decode=False):
 @app.route('/upload/', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        print "%s" % request
-        print "%s" % request.files
         # Validations
         if 'files' not in request.files:
             return jsonify({"data": {}, "error": "No file part uploaded"}), 500
