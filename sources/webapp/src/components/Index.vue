@@ -42,17 +42,31 @@
 </template>
 
 <script>
+import { postFiles } from '@/api'
+
 export default {
   name: 'Info',
   props: ['loading', 'data', 'labels'],
   data() {
     return {
+      error: '',
       files: null
     }
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
+      if (this.files) {
+        postFiles(this.files)
+          .then(() => {
+            this.$refs['files-input'].reset()
+          })
+          .catch(err => {
+            /* Reset our form values */
+            this.error = err.message
+          })
+        this.$refs['files-input'].reset()
+      }
     },
     onReset(evt) {
       evt.preventDefault()
