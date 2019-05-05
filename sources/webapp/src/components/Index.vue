@@ -8,28 +8,27 @@
             <img src="/static/images/spinner.gif" width="32" height="32"/>
         </div>
         <div v-else>
-            <b-form @submit="onSubmit" @reset="onReset" id="upload-files">
-                  <b-row align-v="start" align-h="around">
-                      <b-col sm="10">
-                          <div>
-                              <b-form-file multiple accept="image/*"
-                                      v-model="file" v-bind:state="Boolean(file)"
-                                      placeholder="Choose files..." drop-placeholder="Drop files here..." browse-text="Browse">
-                                 <template slot="file-name" slot-scope="{ names }">
-                                   <b-badge variant="dark">{{ names[0] }}</b-badge>
-                                   <b-badge v-if="names.length > 1" variant="dark" class="ml-1"> + {{ names.length - 1 }} More files</b-badge>
-                                 </template>
-                              </b-form-file>
-                          </div>
-                      </b-col>
-                  </b-row>
-                  <b-row class="my-1">
-                    <b-col sm="12">
-                      <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="uaidClearButton">Clear</b-button>
-                      <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="uaidAdminButton">Submit</b-button>
-                    </b-col>
-                  </b-row>
-            </b-form>
+            <b-row align-v="start" align-h="around">
+                <b-col sm="10">
+                    <div>
+                        <b-form-file multiple accept="image/*"
+                                ref="files-input"
+                                v-model="files" v-bind:state="Boolean(files)"
+                                placeholder="Choose files..." drop-placeholder="Drop files here..." browse-text="Browse">
+                           <template slot="file-name" slot-scope="{ names }">
+                             <b-badge variant="dark">{{ names[0] }}</b-badge>
+                             <b-badge v-if="names.length > 1" variant="dark" class="ml-1"> + {{ names.length - 1 }} More files</b-badge>
+                           </template>
+                        </b-form-file>
+                    </div>
+                </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="12">
+                  <b-button @click="onReset" class="mr-2">Clear</b-button>
+                  <b-button @click="onSubmit">Send</b-button>
+              </b-col>
+            </b-row>
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
                     <br />
@@ -46,7 +45,7 @@ export default {
   props: ['loading', 'data', 'labels'],
   data() {
     return {
-      file: null
+      files: null
     }
   },
   methods: {
