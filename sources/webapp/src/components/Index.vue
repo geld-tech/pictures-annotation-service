@@ -24,7 +24,7 @@
                 </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="10">
+              <b-col sm="12">
                 <div class="float-right">
                   <b-button @click="onReset" class="mr-2">Clear</b-button>
                   <b-button @click="onSubmit">Send</b-button>
