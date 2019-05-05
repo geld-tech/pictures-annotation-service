@@ -8,7 +8,7 @@
             <img src="/static/images/spinner.gif" width="32" height="32"/>
         </div>
         <div v-else>
-            <b-form @submit="onSubmit" @reset="onReset" id="uaid">
+            <b-form @submit="onSubmit" @reset="onReset" id="upload-files">
                   <b-row align-v="start" align-h="around">
                       <b-col sm="10">
                           <div>
