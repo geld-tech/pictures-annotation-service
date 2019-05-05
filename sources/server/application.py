@@ -273,6 +273,11 @@ def obfuscate(text, decode=False):
         return text
 
 
+def type_allowed(filename):
+    global types_list
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in types_list
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
