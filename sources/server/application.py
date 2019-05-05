@@ -273,6 +273,24 @@ def obfuscate(text, decode=False):
         return text
 
 
+@app.route('/upload/', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # Validations
+        if 'file' not in request.files:
+            return jsonify({"data": {}, "error": "No file part uploaded"}), 500
+        rfile = request.files['file']
+        if rfile.filename == '':
+            return jsonify({"data": {}, "error": "No selected file"}), 500
+        # Save file
+        if rfile and type_allowed(rfile.filename):
+            filename = secure_filename(rfile.filename)
+            rfile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return jsonify({"data": {"response": "Success!", "file": filename}}), 200
+    else:
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
+
+
 def type_allowed(filename):
     global types_list
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in types_list
