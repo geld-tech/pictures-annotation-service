@@ -54,7 +54,7 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault()
-      this.$refs['file-input'].reset()
+      this.$refs['files-input'].reset()
     }
   }
 }
