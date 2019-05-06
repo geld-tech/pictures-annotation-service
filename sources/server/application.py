@@ -282,14 +282,21 @@ def upload():
         # Validations
         if 'files' not in request.files:
             return jsonify({"data": {}, "error": "No file part uploaded"}), 500
-        rfile = request.files['files']
-        if rfile.filename == '':
-            return jsonify({"data": {}, "error": "No selected files"}), 500
+        files = request.files.getlist('files')
+        for f in files:
+            if f.filename == '':
+                return jsonify({"data": {}, "error": "No selected files"}), 500
+        for f in files:
+            if not type_allowed(f.filename):
+                return jsonify({"data": {}, "error": "Filetype not allowed"}), 500
         # Save file
-        if rfile and type_allowed(rfile.filename):
-            filename = secure_filename(rfile.filename)
-            rfile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return jsonify({"data": {"response": "Success!", "file": filename}}), 200
+        filenames = []
+        for f in files:
+            if f:
+                filename = secure_filename(f.filename)
+                f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                filenames.append(filename)
+        return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
