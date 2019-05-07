@@ -5,7 +5,7 @@ Summary:    __PACKAGE_DESC__
 
 License:    __LICENSE__
 
-Requires:   bash, python, epel-release, nginx, python-daemon, python-flask, python-httplib2, python-requests, python-sqlalchemy, python-gunicorn, nodejs, npm
+Requires:   bash, python, epel-release, nginx, python-daemon, python-flask, python-httplib2, python-requests, python-sqlalchemy, python-gunicorn, nodejs, npm, rabbitmq-server
 
 ##############################################################################
 # description macro to include information in the RPM header
@@ -54,7 +54,7 @@ else
     python -c  "import os; print os.urandom(24)" > __PACKAGE_DIR__/config/secret.uti
 
     # Install required dependencies
-    pip install --no-cache-dir --upgrade h5py pydot_ng keras
+    pip install --no-cache-dir --upgrade h5py pydot_ng keras celery
 
     # Performing a fresh install of  the package
     echo -n "Installing service..."
