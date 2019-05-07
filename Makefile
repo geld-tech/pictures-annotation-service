@@ -158,7 +158,7 @@ webapp-config: webapp-settings
 	$(call echo_title, "SETUP STUB SETTINGS")
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
 
-## Start metrics collector daemon
+## Start metrics worker daemon
 daemon-start:
 	$(call echo_title, "START WORKER DAEMON")
 	@echo "Starting background daemon locally, use 'make daemon-stop' to terminate.."
@@ -167,7 +167,7 @@ daemon-start:
 	@echo ""
 	@sleep 3
 
-## Stop metrics collector daemon
+## Stop metrics worker daemon
 daemon-stop:
 	$(call echo_title, "STOP WORKER DAEMON")
 	-python $(SRV_DEV_ENV)/worker.py stop
@@ -210,7 +210,7 @@ docker-run-deb:
 		apt update ; \
 		apt install -y pictures-annotation-service ; \
 		systemctl status pictures-annotation-service ; \
-		systemctl status pictures-annotation-service-collector ; \
+		systemctl status pictures-annotation-service-worker ; \
 		$$SHELL '
 
 ## Validate latest .rpm package on a local CentOS image with Docker
@@ -229,7 +229,7 @@ docker-run-rpm:
 			tee -a /etc/yum.repos.d/geld.tech.repo ; \
 		yum install -y pictures-annotation-service ; \
 		systemctl status pictures-annotation-service ; \
-		systemctl status pictures-annotation-service-collector ; \
+		systemctl status pictures-annotation-service-worker ; \
 		$$SHELL '
 
 
