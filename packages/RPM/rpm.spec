@@ -44,7 +44,7 @@ if [ $1 -gt 1 ] ; then
     echo -n "Restarting service..."
     systemctl daemon-reload
     systemctl restart __PACKAGE_NAME__ || true
-    systemctl restart __PACKAGE_NAME__-collector || true
+    systemctl restart __PACKAGE_NAME__-worker || true
     echo " OK"
     echo ""
     echo "Service __PACKAGE_NAME__ upgraded successfully!!"
@@ -60,7 +60,7 @@ else
     echo -n "Installing service..."
     systemctl daemon-reload
     systemctl enable __PACKAGE_NAME__ || true
-    systemctl enable __PACKAGE_NAME__-collector || true
+    systemctl enable __PACKAGE_NAME__-worker || true
     echo " OK"
     echo ""
     echo -n "Adding required user and group..."
@@ -70,7 +70,7 @@ else
     echo ""
     echo -n "Starting service..."
     systemctl start __PACKAGE_NAME__ || true
-    systemctl start __PACKAGE_NAME__-collector || true
+    systemctl start __PACKAGE_NAME__-worker || true
     echo " OK"
     echo ""
     echo "Service __PACKAGE_NAME__ installed successfully!"
@@ -89,8 +89,8 @@ echo "Executing Pre-Uninstallation macro.. "
 
 case "$1" in
   0)
-    systemctl disable __PACKAGE_NAME__-collector || true
-    systemctl stop __PACKAGE_NAME__-collector || true
+    systemctl disable __PACKAGE_NAME__-worker || true
+    systemctl stop __PACKAGE_NAME__-worker || true
     systemctl disable __PACKAGE_NAME__ || true
     systemctl stop __PACKAGE_NAME__ || true
     rm -f __PACKAGE_DIR__/config/settings.cfg
