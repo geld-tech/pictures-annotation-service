@@ -39,7 +39,7 @@ case "$1" in
 			echo "Service __PACKAGE_NAME__ upgraded successfully!!"
 		else
 			# Install required dependencies
-                        pip install --no-cache-dir --upgrade h5py pydot_ng keras
+                        pip install --no-cache-dir --upgrade h5py pydot_ng keras celery
 
 			# Performing a fresh install of the package
 			echo -n "Installing service..."
