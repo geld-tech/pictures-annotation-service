@@ -1,5 +1,6 @@
 # pictures-annotation-service
 
+
 ## Status
 
 <table>
@@ -41,6 +42,7 @@
 ## Description
 
 Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
+
 
 ## Demo
 
@@ -108,6 +110,7 @@ yes | cp -f systemctl.py /usr/bin/systemctl
 chmod a+x /usr/bin/systemctl
 test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
 ```
+
 
 ## Usage
 
