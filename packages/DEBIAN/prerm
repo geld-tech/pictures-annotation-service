@@ -4,8 +4,8 @@ set -e
 echo "Pre-Removal Macro"
 
 if [ "$1" = "remove" ]; then
-	systemctl disable __PACKAGE_NAME__-collector || true
-	systemctl stop __PACKAGE_NAME__-collector || true
+	systemctl disable __PACKAGE_NAME__-worker || true
+	systemctl stop __PACKAGE_NAME__-worker || true
 
 	systemctl disable __PACKAGE_NAME__ || true
 	systemctl stop __PACKAGE_NAME__ || true

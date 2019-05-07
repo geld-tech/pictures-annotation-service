@@ -32,7 +32,7 @@ case "$1" in
 			echo ""
 			echo -n "Restarting service..."
 			systemctl daemon-reload
-			systemctl restart __PACKAGE_NAME__-collector || true
+			systemctl restart __PACKAGE_NAME__-worker || true
 			systemctl restart __PACKAGE_NAME__ || true
 			echo " OK"
 			echo ""
@@ -44,12 +44,12 @@ case "$1" in
 			# Performing a fresh install of the package
 			echo -n "Installing service..."
 			systemctl daemon-reload
-			systemctl enable __PACKAGE_NAME__-collector || true
+			systemctl enable __PACKAGE_NAME__-worker || true
 			systemctl enable __PACKAGE_NAME__ || true
 			echo " OK"
 			echo ""
 			echo -n "Starting service..."
-			systemctl start __PACKAGE_NAME__-collector || true
+			systemctl start __PACKAGE_NAME__-worker || true
 			systemctl start __PACKAGE_NAME__ || true
 			echo " OK"
 			echo ""
