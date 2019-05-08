@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from __future__ import absolute_import, unicode_literals
+
 import atexit
 import os
 import sys
@@ -8,8 +10,10 @@ from daemon import runner
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from celery import Celery
 from modules.Models import Base, Server
 
+app = Celery('app', broker='amqp://guest@localhost//')
 
 class Worker():
     def __init__(self, pid_file, db_path, config_file, poll_interval=60, debug=True):
@@ -83,6 +87,11 @@ def is_running(pid_file):
         return True, pid
     else:
         return False, -1
+
+
+@app.task
+def identify(filename):
+    return True
 
 
 # Main
