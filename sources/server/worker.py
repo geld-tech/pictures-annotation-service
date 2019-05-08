@@ -15,6 +15,7 @@ from modules.Models import Base, Server
 
 app = Celery('app', broker='amqp://guest@localhost//')
 
+
 class Worker():
     def __init__(self, pid_file, db_path, config_file, poll_interval=60, debug=True):
         self.stdin_path = '/dev/null'
