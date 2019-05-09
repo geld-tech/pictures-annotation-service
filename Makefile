@@ -163,14 +163,19 @@ daemon-start:
 	$(call echo_title, "START WORKER DAEMON")
 	@echo "Starting background daemon locally, use 'make daemon-stop' to terminate.."
 	@echo ""
-	python $(SRV_DEV_ENV)/worker.py start debug
+	-cd $(SRV_DEV_ENV)
+	-export MQ_USER="appUser"
+	-export MQ_PASS="appPass"
+	-export MQ_HOST="localhost"
+	-export MQ_VAPP="vapp"
+	celery -A worker worker --loglevel=debug &
 	@echo ""
 	@sleep 3
+
 
 ## Stop metrics worker daemon
 daemon-stop:
 	$(call echo_title, "STOP WORKER DAEMON")
-	-python $(SRV_DEV_ENV)/worker.py stop
 	-pkill -f $(SRV_DEV_ENV)/worker.py
 
 ## Start web application
