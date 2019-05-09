@@ -50,6 +50,11 @@ if [ $1 -gt 1 ] ; then
     echo "Service __PACKAGE_NAME__ upgraded successfully!!"
 
 else
+    # Enable the service to start at boot time and start the RabbitMQ server
+    # (acceptable configuration for a required dependency)
+    systemctl enable rabbitmq-server || true
+    systemctl start rabbitmq-server || true
+
     # Creates unique session secret
     python -c  "import os; print os.urandom(24)" > __PACKAGE_DIR__/config/secret.uti
 
