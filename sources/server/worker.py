@@ -13,7 +13,7 @@ from sqlalchemy.orm import sessionmaker
 
 from modules.Models import Base, Server
 
-app = Celery('app', broker='amqp://guest@localhost//')
+app = Celery('app', broker='amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP']))
 
 class Worker():
     def __init__(self, pid_file, db_path, config_file, poll_interval=60, debug=True):
