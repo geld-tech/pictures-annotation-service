@@ -22,6 +22,7 @@ broker_uri = 'amqp://%s:%s@%s/%s' % (
 app = Celery('__PACKAGE_NAME__', broker=broker_uri)
 app.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 
+
 class Worker():
     def __init__(self, pid_file, db_path, config_file, poll_interval=60, debug=True):
         self.stdin_path = '/dev/null'
