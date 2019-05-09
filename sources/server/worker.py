@@ -20,11 +20,7 @@ broker_uri = 'amqp://%s:%s@%s/%s' % (
     os.environ['MQ_VAPP']
 )
 app = Celery('__PACKAGE_NAME__', broker=broker_uri)
-app.conf.update(
-    BROKER_USE_SSL = {'ca_certs':trustCert,'keyfile':sslKey,'certfile':sslCert,'cert_reqs':ssl.CERT_REQUIRED},
-    BROKER_POOL_LIMIT = None,
-    CELERY_TASK_IGNORE_RESULT = True
-)
+app.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 
 class Worker():
     def __init__(self, pid_file, db_path, config_file, poll_interval=60, debug=True):
