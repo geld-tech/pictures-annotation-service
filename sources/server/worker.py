@@ -102,7 +102,11 @@ def is_running(pid_file):
 
 @app.task
 def identify(filename):
-    return True
+    try:
+        print "Identifying file: %s" % filename
+        return True
+    except Exception, e:
+        return False
 
 
 # Main
