@@ -6,15 +6,14 @@ import os
 import sys
 import time
 
+from celery import Celery
 from daemon import runner
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from celery import Celery
 from modules.Models import Base, Server
 
 app = Celery('app', broker='amqp://guest@localhost//')
-
 
 class Worker():
     def __init__(self, pid_file, db_path, config_file, poll_interval=60, debug=True):
