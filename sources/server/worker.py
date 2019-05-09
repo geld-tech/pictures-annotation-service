@@ -98,7 +98,7 @@ def identify(filename):
     try:
         print "Identifying file: %s" % filename
         return True
-    except Exception, e:
+    except Exception:
         return False
 
 
