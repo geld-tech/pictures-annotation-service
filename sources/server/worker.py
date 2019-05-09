@@ -13,12 +13,8 @@ from sqlalchemy.orm import sessionmaker
 
 from modules.Models import Base, Server
 
-broker_uri = 'amqp://%s:%s@%s/%s' % (
-    os.environ['MQ_USER'],
-    os.environ['MQ_PASS'],
-    os.environ['MQ_HOST'],
-    os.environ['MQ_VAPP']
-)
+# Initialisation
+broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 app = Celery('__PACKAGE_NAME__', broker=broker_uri)
 app.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 
