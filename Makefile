@@ -184,6 +184,10 @@ webapp-start:
 	@python -c  "import os; print os.urandom(24)" > $(SRV_DEV_ENV)/config/secret.uti
 	@echo "Starting web application locally, use 'make webapp-stop' to terminate.."
 	@echo ""
+	-export MQ_USER="appUser"
+	-export MQ_PASS="appPass"
+	-export MQ_HOST="localhost"
+	-export MQ_VAPP="vapp"
 	python $(SRV_DEV_ENV)/application.py &
 	@echo ""
 	@sleep 1
