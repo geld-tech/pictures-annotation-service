@@ -15,7 +15,7 @@ PACKAGE_DATE=01-01-1970
 MQ_USER="mquser"
 MQ_PASS="mqsecret"
 MQ_HOST="localhost"
-MQ_VAPP="vhost"
+MQ_VAPP=$(PACKAGE_NAME)
 
 # UI Tests
 PROTO=http
