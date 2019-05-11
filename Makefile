@@ -12,9 +12,9 @@ PACKAGE_VERSION=0.0.1
 PACKAGE_DATE=01-01-1970
 
 # MQ Variables
-MQ_USER="mquser"
-MQ_PASS="mqsecret"
-MQ_HOST="localhost"
+MQ_USER=mquser
+MQ_PASS=mqsecret
+MQ_HOST=localhost
 MQ_VAPP=$(PACKAGE_NAME)
 
 # UI Tests
