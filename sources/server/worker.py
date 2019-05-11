@@ -13,10 +13,10 @@ from sqlalchemy.orm import sessionmaker
 
 from modules.Models import Base, Server
 
-# Initialisation
+# Celery Initialisation
 broker_uri = 'pyamqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
-app = Celery('__PACKAGE_NAME__', broker=broker_uri)
-app.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
+celery = Celery('__PACKAGE_NAME__', broker=broker_uri)
+celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 
 
 class Worker():
@@ -93,7 +93,7 @@ def is_running(pid_file):
         return False, -1
 
 
-@app.task
+@celery.task
 def identify(filename):
     try:
         print "Identifying file: %s" % filename
