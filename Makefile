@@ -11,12 +11,6 @@ PACKAGE_AUTHOR=geld.tech
 PACKAGE_VERSION=0.0.1
 PACKAGE_DATE=01-01-1970
 
-# MQ Variables
-MQ_USER=mquser
-MQ_PASS=mqsecret
-MQ_HOST=localhost
-MQ_VAPP=$(PACKAGE_NAME)
-
 # UI Tests
 PROTO=http
 HOST=0.0.0.0
@@ -25,6 +19,13 @@ WAIT=10
 
 # Conditional Processing
 NPM_AUDIT=true
+
+# MQ Variables
+export MQ_USER:="mquser"
+export MQ_PASS:="mqsecret"
+export MQ_HOST:="localhost"
+export MQ_VAPP:=$(PACKAGE_NAME)
+
 
 ## Run all targets locally
 all: stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
@@ -170,10 +171,6 @@ daemon-start:
 	@echo "Starting background daemon locally, use 'make daemon-stop' to terminate.."
 	@echo ""
 	-cd $(SRV_DEV_ENV)
-	-export MQ_USER="$(MQ_USER)"
-	-export MQ_PASS="$(MQ_PASS)"
-	-export MQ_HOST="$(MQ_HOST)"
-	-export MQ_VAPP="$(MQ_VAPP)"
 	celery -A worker worker --loglevel=debug &
 	@echo ""
 	@sleep 3
@@ -190,10 +187,6 @@ webapp-start:
 	@python -c  "import os; print os.urandom(24)" > $(SRV_DEV_ENV)/config/secret.uti
 	@echo "Starting web application locally, use 'make webapp-stop' to terminate.."
 	@echo ""
-	-export MQ_USER="$(MQ_USER)"
-	-export MQ_PASS="$(MQ_PASS)"
-	-export MQ_HOST="$(MQ_HOST)"
-	-export MQ_VAPP="$(MQ_VAPP)"
 	python $(SRV_DEV_ENV)/application.py &
 	@echo ""
 	@sleep 1
