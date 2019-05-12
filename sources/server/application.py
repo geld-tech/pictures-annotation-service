@@ -320,7 +320,7 @@ def page_not_found(e):
 
 
 @celery.task
-def my_background_task(filename):
+def identify_picture(filename):
     return "Done!"
 
 
