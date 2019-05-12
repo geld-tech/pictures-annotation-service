@@ -162,8 +162,12 @@ webapp-settings:
 
 ## Configure stub settings.cfg
 webapp-config: webapp-settings
-	$(call echo_title, "SETUP STUB SETTINGS")
 	cp -f $(SRV_DEV_ENV)/config/settings.cfg.dev $(SRV_DEV_ENV)/config/settings.cfg
+
+## Upload file to Web App
+upload:
+	$(call echo_title, "UPLOAD")
+	@curl -v -H "Content-Type: multipart/form-data" -X POST -F "files=@tests/wolf_01.jpg" http://0.0.0.0:5000/upload
 
 ## Start metrics worker daemon
 daemon-start:
