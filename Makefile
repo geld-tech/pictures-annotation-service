@@ -193,7 +193,7 @@ webapp-start:
 	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
 	@echo ""
-	@sleep 1
+	@sleep 3
 
 ## Stop web application
 webapp-stop:
