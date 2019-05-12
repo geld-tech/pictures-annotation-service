@@ -319,6 +319,11 @@ def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
 
 
+@celery.task
+def my_background_task(filename):
+    return "Done!"
+
+
 if __name__ == "__main__":
     # Parse options
     opts_parser = OptionParser()
