@@ -52,7 +52,7 @@ app.secret_key = secret_key
 app.debug = True
 
 # Celery Initialisation
-broker_uri = 'pyamqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
+broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 app.config['CELERY_BROKER_URL'] = broker_uri
 app.config['CELERY_RESULT_BACKEND'] = broker_uri
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
