@@ -304,8 +304,7 @@ def upload():
                 filename = secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
-        identify_task = identify_picture.apply_async(args=[filenames])
-        return jsonify({"data": {"response": "Success!", "files": filenames, "result": identify_task}}), 200
+        return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
