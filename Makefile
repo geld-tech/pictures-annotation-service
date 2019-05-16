@@ -215,10 +215,10 @@ mq-stop:
 	@docker rm -f `cat $(LOCAL_DEV_ENV)/rabbitmq.pid`
 
 ## Start local development environment
-start: all daemon-start webapp-start
+start: all mq-start daemon-start webapp-start
 
 ## Stop local development environment
-stop: daemon-stop webapp-stop
+stop: daemon-stop webapp-stop mq-stop
 
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
@@ -264,6 +264,7 @@ docker-run-rpm:
 .PHONY: vue-dev-tools npm-install npm-lint npm-audit npm-build
 .PHONY: webapp-setup webapp-settings webapp-config
 .PHONY: daemon-start daemon-stop webapp-start webapp-stop
+.PHONY: mq-start mq-stop
 .PHONY: start stop
 
 
