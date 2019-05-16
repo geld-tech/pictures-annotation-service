@@ -212,7 +212,7 @@ mq-start:
 ## Stop background Message Queue
 mq-stop:
 	$(call echo_title, "STOP MESSAGE QUEUE")
-	@docker rm -f < $(LOCAL_DEV_ENV)/rabbitmq.pid
+	@docker rm -f `cat $(LOCAL_DEV_ENV)/rabbitmq.pid`
 
 ## Start local development environment
 start: all daemon-start webapp-start
