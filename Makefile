@@ -206,13 +206,13 @@ mq-start:
 	@echo ""
 	@docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 rabbitmq:3
 	@sleep 3
-	@echo ""
 	@docker ps -qf "name=rabbitmq" > $(LOCAL_DEV_ENV)/rabbitmq.pid
 
 ## Stop background Message Queue
 mq-stop:
 	$(call echo_title, "STOP MESSAGE QUEUE")
 	@docker rm -f `cat $(LOCAL_DEV_ENV)/rabbitmq.pid`
+	@rm -f $(LOCAL_DEV_ENV)/rabbitmq.pid
 
 ## Start local development environment
 start: all mq-start daemon-start webapp-start
