@@ -211,7 +211,6 @@ mq-start:
 ## Stop background Message Queue
 mq-stop:
 	$(call echo_title, "STOP MESSAGE QUEUE")
-	@echo ""
 	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
 		docker rm -f `cat $(LOCAL_DEV_ENV)/rabbitmq.pid`; \
 		rm -f $(LOCAL_DEV_ENV)/rabbitmq.pid; \
