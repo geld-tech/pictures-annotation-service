@@ -200,6 +200,20 @@ webapp-stop:
 	$(call echo_title, "STOP WEB APPLICATION")
 	-pkill -f $(SRV_DEV_ENV)/application.py
 
+## Start background Message Queue
+mq-start:
+	$(call echo_title, "START MESSAGE QUEUE")
+	@echo ""
+	@docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 rabbitmq:3
+	@sleep 3
+	@echo ""
+	@docker ps -qf "name=rabbitmq" > $(LOCAL_DEV_ENV)/rabbitmq.pid
+
+## Stop background Message Queue
+mq-stop:
+	$(call echo_title, "STOP MESSAGE QUEUE")
+	@docker rm -f < $(LOCAL_DEV_ENV)/rabbitmq.pid
+
 ## Start local development environment
 start: all daemon-start webapp-start
 
