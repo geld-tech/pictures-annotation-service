@@ -204,9 +204,14 @@ webapp-stop:
 mq-start:
 	$(call echo_title, "START MESSAGE QUEUE")
 	@echo ""
-	@docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 rabbitmq:3
-	@sleep 3
-	@docker ps -qf "name=rabbitmq" > $(LOCAL_DEV_ENV)/rabbitmq.pid
+	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
+		echo "Message queue running"; \
+		docker ps -f "name=rabbitmq"; \
+	else \
+		docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 rabbitmq:3; \
+		sleep 3; \
+		docker ps -qf "name=rabbitmq" > $(LOCAL_DEV_ENV)/rabbitmq.pid; \
+	fi
 
 ## Check Message Queue Status
 mq-status:
