@@ -8,9 +8,10 @@ import time
 
 from celery import Celery
 from daemon import runner
-from modules.Models import Base, Server
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from modules.Models import Base, Server
 
 # Celery Initialisation
 # broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
