@@ -16,11 +16,10 @@ from optparse import OptionParser
 
 from celery import Celery
 from flask import Flask, jsonify, render_template, request, session
+from modules.Models import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
-
-from modules.Models import Base
 
 # Global config
 local_path = os.path.dirname(os.path.abspath(__file__))
@@ -52,7 +51,7 @@ app.secret_key = secret_key
 app.debug = True
 
 # Celery Initialisation
-#broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
+# broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 broker_uri = 'amqp://localhost:5672/'
 app.config['CELERY_BROKER_URL'] = broker_uri
 app.config['CELERY_RESULT_BACKEND'] = broker_uri
