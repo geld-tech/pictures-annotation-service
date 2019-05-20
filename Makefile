@@ -208,6 +208,15 @@ mq-start:
 	@sleep 3
 	@docker ps -qf "name=rabbitmq" > $(LOCAL_DEV_ENV)/rabbitmq.pid
 
+## Check Message Queue Status
+mq-status:
+	$(call echo_title, "STOP MESSAGE QUEUE")
+	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
+		docker ps -f "name=rabbitmq"; \
+	else \
+		echo "No message queue running.."; \
+	fi
+
 ## Stop background Message Queue
 mq-stop:
 	$(call echo_title, "STOP MESSAGE QUEUE")
