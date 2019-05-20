@@ -322,7 +322,10 @@ def page_not_found(e):
 
 @celery.task
 def identify_picture(filenames):
-    return "Done!"
+    try:
+        return "Done!"
+    except:
+        return "Failed!"
 
 
 if __name__ == "__main__":
