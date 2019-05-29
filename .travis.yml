@@ -66,6 +66,8 @@ before_install:
   - find . -type f | xargs sed -i "s.__PACKAGE_DIR__.$PACKAGE_DIR.g"
 
 install:
+  # Build artifacts
+  - make all
   # NPM packages
   - npm update -g npm
   # Build Vue web application
