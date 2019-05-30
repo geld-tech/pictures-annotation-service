@@ -280,7 +280,7 @@ docker-run-rpm:
 .PHONY: vue-dev-tools npm-install npm-lint npm-audit npm-build
 .PHONY: webapp-setup webapp-settings webapp-config
 .PHONY: daemon-start daemon-stop webapp-start webapp-stop
-.PHONY: mq-start mq-stop
+.PHONY: mq-start mq-stop mq-status
 .PHONY: start stop
 
 
