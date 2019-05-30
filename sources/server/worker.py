@@ -1,17 +1,9 @@
 #!/usr/bin/env python
 from __future__ import absolute_import, unicode_literals
 
-import atexit
 import os
-import sys
-import time
 
 from celery import Celery
-from daemon import runner
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from modules.Models import Base, Server
 
 # Global variables
 TMP_DIR = '/tmp'
@@ -35,5 +27,4 @@ def identify(filename):
 @celery.task
 def list():
     ''' List working directory contents '''
-    return os.listdir(BASEDIR)
-
+    return os.listdir(TMP_DIR)
