@@ -175,7 +175,7 @@ daemon-start:
 	@echo "Starting background daemon locally, use 'make daemon-stop' to terminate.."
 	@echo ""
 	-cd $(SRV_DEV_ENV)
-	celery -A worker worker --loglevel=debug &
+	celery -A worker worker --loglevel=debug
 	@echo ""
 	@sleep 3
 
