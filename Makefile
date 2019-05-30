@@ -215,7 +215,7 @@ mq-start:
 
 ## Check Message Queue Status
 mq-status:
-	$(call echo_title, "STOP MESSAGE QUEUE")
+	$(call echo_title, "STATUS MESSAGE QUEUE")
 	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
 		docker ps -f "name=rabbitmq"; \
 	else \
