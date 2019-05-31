@@ -182,7 +182,12 @@ daemon-start:
 ## Stop metrics worker daemon
 daemon-stop:
 	$(call echo_title, "STOP WORKER DAEMON")
-	cd $(SRV_DEV_ENV); celery multi stopwait worker --pidfile="celery-%n.pid"
+	@if [ -d "$(SRV_DEV_ENV)" ]; then \
+		set -x; \
+		cd $(SRV_DEV_ENV); \
+		celery multi stopwait worker --pidfile="celery-%n.pid"; \
+		set +x; \
+	fi
 
 ## Start web application
 webapp-start:
