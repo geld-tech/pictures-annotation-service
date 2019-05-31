@@ -68,9 +68,11 @@ else
     systemctl enable __PACKAGE_NAME__-worker || true
     echo " OK"
     echo ""
-    echo -n "Adding required user and group..."
+    echo -n "Adding required users and groups..."
     id -u www-data || useradd -MU www-data
     id -g www-data || usermod -L  www-data
+    id -u celery || useradd -MU celery
+    id -g celery || usermod -L  celery
     echo " OK"
     echo ""
     echo -n "Starting service..."
