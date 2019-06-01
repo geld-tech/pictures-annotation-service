@@ -153,4 +153,3 @@ make start
 Then, access the application locally using a browser at the address: [http://0.0.0.0:5000/](http://0.0.0.0:5000/).
 
 Type `make stop` at any stage to stop the local development application.
-
