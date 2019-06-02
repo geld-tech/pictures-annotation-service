@@ -15,10 +15,10 @@ celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 
 
 @celery.task
-def identify(filename):
-    ''' Identify picture provided '''
+def identify(filenames):
+    ''' Identify provided pictures '''
     try:
-        print "Identifying file: %s" % filename
+        print "Identifying files: %s" % filenames
         return True
     except Exception:
         return False
