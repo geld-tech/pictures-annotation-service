@@ -320,10 +320,10 @@ def type_allowed(filename):
 @celery.task
 def identify(filenames):
     try:
-        print "Done!"
+        logger.info("Done")
         return True
     except:
-        print "Failed!"
+        logger.error("Failed!")
         return True
 
 

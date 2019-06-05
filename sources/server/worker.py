@@ -26,7 +26,7 @@ logger.info("Celery worker connected to: %s" % broker_uri)
 def identify(filenames):
     ''' Identify provided pictures '''
     try:
-        print "Identifying files: %s" % filenames
+        logger.info("Identifying files: %s" % filenames)
         return True
     except Exception:
         return False
