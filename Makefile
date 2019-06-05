@@ -169,18 +169,18 @@ upload:
 	$(call echo_title, "UPLOAD")
 	@curl -v -H "Content-Type: multipart/form-data" -X POST -F "files=@tests/wolf_01.jpg" http://0.0.0.0:5000/upload
 
-## Start metrics worker daemon
-daemon-start:
+## Start metrics worker
+worker-start:
 	$(call echo_title, "START WORKER DAEMON")
-	@echo "Starting background daemon locally, use 'make daemon-stop' to terminate.."
+	@echo "Starting background worker daemon locally, use 'make worker-stop' to terminate.."
 	@echo ""
 	cd $(SRV_DEV_ENV); celery multi start worker -A worker --pidfile="celery-%n.pid" --logfile="celery-%n.log" --loglevel=debug
 	@echo ""
 	@sleep 3
 
 
-## Stop metrics worker daemon
-daemon-stop:
+## Stop metrics worker
+worker-stop:
 	$(call echo_title, "STOP WORKER DAEMON")
 	@if [ -d "$(SRV_DEV_ENV)" ]; then \
 		set -x; \
@@ -235,10 +235,10 @@ mq-stop:
 	fi
 
 ## Start local development environment
-start: all mq-start daemon-start webapp-start
+start: all mq-start worker-start webapp-start
 
 ## Stop local development environment
-stop: daemon-stop webapp-stop mq-stop
+stop: worker-stop webapp-stop mq-stop
 
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
