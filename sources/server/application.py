@@ -57,7 +57,7 @@ app.config['CELERY_BROKER_URL'] = broker_uri
 app.config['CELERY_RESULT_BACKEND'] = broker_uri
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
-print "Celery connected to: %s" % broker_uri
+logger.info("Celery application connected to: %s" % broker_uri)
 
 # DB Session
 db_path = local_path+'/data/metrics.sqlite3'
