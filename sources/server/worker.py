@@ -7,11 +7,12 @@ from celery import Celery
 
 # Global variables
 TMP_DIR = '/tmp'
-broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 
 # Celery Initialisation
+broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 celery = Celery('__PACKAGE_NAME__', broker=broker_uri)
 celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
+print "Celery connected to: %s" % broker_uri
 
 
 @celery.task
