@@ -21,9 +21,9 @@ WAIT=10
 NPM_AUDIT=true
 
 # MQ Variables
-export MQ_USER:="mquser"
-export MQ_PASS:="mqsecret"
-export MQ_HOST:="localhost"
+export MQ_USER:=mquser
+export MQ_PASS:=mqsecret
+export MQ_HOST:=localhost
 export MQ_VAPP:=$(PACKAGE_NAME)
 
 
