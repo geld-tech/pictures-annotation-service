@@ -305,6 +305,7 @@ def upload():
                 filename = secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
+        identify(filenames)
         return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
@@ -313,6 +314,14 @@ def upload():
 def type_allowed(filename):
     global types_list
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in types_list
+
+
+@celery.task
+def identify(filenames):
+    try:
+        return "Done!"
+    except:
+        return "Failed!"
 
 
 @app.errorhandler(404)
