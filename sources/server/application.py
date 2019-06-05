@@ -318,9 +318,11 @@ def type_allowed(filename):
 @celery.task
 def identify(filenames):
     try:
-        return "Done!"
+        print "Done!"
+        return True
     except:
-        return "Failed!"
+        print "Failed!"
+        return True
 
 
 @app.errorhandler(404)
