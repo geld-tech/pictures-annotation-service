@@ -54,10 +54,8 @@ app.debug = True
 # Celery Initialisation
 # broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 broker_uri = 'amqp://localhost/'
-app.config['CELERY_BROKER_URL'] = broker_uri
-app.config['CELERY_RESULT_BACKEND'] = broker_uri
-celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
-celery.conf.update(app.config)
+celery = Celery(app.name, broker=broker_uri)
+celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 logger.info("Celery application connected to: %s" % broker_uri)
 
 # DB Session
