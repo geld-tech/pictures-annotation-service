@@ -222,6 +222,8 @@ mq-status:
 	$(call echo_title, "STATUS MESSAGE QUEUE")
 	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
 		docker ps -f "name=rabbitmq"; \
+		echo ""; \
+		docker exec -it `docker ps -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'` /bin/bash -c "rabbitmqctl list_connections"; \
 	else \
 		echo "No message queue running.."; \
 	fi
