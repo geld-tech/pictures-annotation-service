@@ -29,6 +29,8 @@ secret_file = local_path+'/config/secret.uti'
 upload_dir = local_path+'/data/'
 types_list = set(['bmp', 'ico', 'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'])
 max_length = 8*1024*1024  # 8 MB
+# broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
+broker_uri = 'amqp://localhost/'
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
@@ -47,15 +49,16 @@ else:
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = upload_dir
 app.config['MAX_CONTENT_LENGTH'] = max_length
+app.config['CELERY_BROKER_URL'] = broker_uri
+app.config['CELERY_RESULT_BACKEND'] = broker_uri
 app.url_map.strict_slashes = False
 app.secret_key = secret_key
 app.debug = True
 
 # Celery Initialisation
-# broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
-broker_uri = 'amqp://localhost/'
-celery = Celery(app.name, broker=broker_uri)
+celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
+celery.conf.update(app.config)
 logger.info("Celery application connected to: %s" % broker_uri)
 
 # DB Session
