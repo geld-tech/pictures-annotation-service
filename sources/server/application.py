@@ -307,7 +307,7 @@ def upload():
                 filename = secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
-        identify(filenames)
+        celery.send_task("identify", filenames)
         return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
