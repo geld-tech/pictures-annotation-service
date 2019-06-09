@@ -56,9 +56,9 @@ app.secret_key = secret_key
 app.debug = True
 
 # Celery Initialisation
-celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
-celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
+celery = Celery(app.name, backend='amqp', broker=broker_uri)
 celery.conf.update(app.config)
+celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 logger.info("Celery application connected to: %s" % broker_uri)
 
 # DB Session
@@ -307,7 +307,9 @@ def upload():
                 filename = secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
-        celery.send_task("identify", args=[filenames])
+        task = celery.send_task("identify", args=[filenames])
+        results = task.get()
+        print "Results: %s" % results
         return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
