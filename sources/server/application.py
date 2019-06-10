@@ -307,6 +307,7 @@ def upload():
                 filename = secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
+        print "Celery Status: %s" % is_celery_working()
         task = celery.send_task("identify", args=[filenames])
         results = task.get()
         print "Results: %s" % results
@@ -328,6 +329,11 @@ def identify(filenames):
     except:
         logger.error("Failed!")
         return True
+
+
+def is_celery_working():
+    result = celery.control.broadcast('ping', reply=True, limit=1)
+    return bool(result)
 
 
 @app.errorhandler(404)
