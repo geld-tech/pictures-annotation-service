@@ -224,8 +224,11 @@ mq-status:
 		docker ps -f "name=rabbitmq"; \
 		echo ""; \
 		docker exec -it `docker ps -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'` /bin/bash -c "rabbitmqctl list_vhosts"; \
+		echo ""; \
 		docker exec -it `docker ps -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'` /bin/bash -c "rabbitmqctl list_connections"; \
+		echo ""; \
 		docker exec -it `docker ps -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'` /bin/bash -c "rabbitmqctl list_channels"; \
+		echo ""; \
 		docker exec -it `docker ps -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'` /bin/bash -c "rabbitmqctl list_queues"; \
 	else \
 		echo "No message queue running.."; \
