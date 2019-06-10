@@ -19,6 +19,7 @@ logger = logging.getLogger('root')
 broker_uri = 'amqp://localhost/'
 celery = Celery('__PACKAGE_NAME__', broker=broker_uri)
 celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
+celery.task_default_queue = '__PACKAGE_NAME__'
 logger.info("Celery worker connected to: %s" % broker_uri)
 
 
