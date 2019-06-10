@@ -59,6 +59,7 @@ app.debug = True
 celery = Celery(app.name, backend='amqp', broker=broker_uri)
 celery.conf.update(app.config)
 celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
+celery.task_default_queue = '__PACKAGE_NAME__'
 logger.info("Celery application connected to: %s" % broker_uri)
 
 # DB Session
