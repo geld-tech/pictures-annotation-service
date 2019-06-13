@@ -309,7 +309,7 @@ def upload():
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
         print "Celery Status: %s" % is_celery_working()
-        task = celery.send_task("identify", args=[filenames])
+        task = celery.send_task("identify", args=[filenames], queue="__PACKAGE_NAME__")
         results = task.get()
         print "Results: %s" % results
         return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
