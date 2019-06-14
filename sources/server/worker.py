@@ -5,7 +5,7 @@ import logging
 import logging.handlers
 import os
 
-from celery import Celery
+from celery import Celery, states
 
 # Global variables
 TMP_DIR = '/tmp'
@@ -23,9 +23,10 @@ celery.task_default_queue = '__PACKAGE_NAME__'
 logger.info("Celery worker connected to: %s" % broker_uri)
 
 
-@celery.task
-def identify(filenames):
+@celery.task(bind=True)
+def identify(self, filenames):
     ''' Identify provided pictures '''
+    self.update_state(state=states.PENDING)
     try:
         logger.info("Identifying files: %s" % filenames)
         return True
