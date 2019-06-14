@@ -311,7 +311,7 @@ def upload():
                 filenames.append(filename)
         # Sending task to MQ
         task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
-        logger.info("Celery Task Queued with ID: %s" % task)
+        logger.info("Celery Task Queued with ID: %s" % task.task_id)
         return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
