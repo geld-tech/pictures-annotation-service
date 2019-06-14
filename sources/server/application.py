@@ -21,6 +21,7 @@ from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
 
 from modules.Models import Base
+from worker import identify
 
 # Global config
 local_path = os.path.dirname(os.path.abspath(__file__))
@@ -320,16 +321,6 @@ def upload():
 def type_allowed(filename):
     global types_list
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in types_list
-
-
-@celery.task
-def identify(filenames):
-    try:
-        logger.info("Done")
-        return True
-    except:
-        logger.error("Failed!")
-        return True
 
 
 def is_celery_working():
