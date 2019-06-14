@@ -30,6 +30,7 @@ def identify(filenames):
         logger.info("Identifying files: %s" % filenames)
         return True
     except Exception:
+        logger.error("Failed!")
         return False
 
 
