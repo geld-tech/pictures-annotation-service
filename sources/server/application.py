@@ -291,6 +291,7 @@ def obfuscate(text, decode=False):
 @app.route('/upload/', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
+        logger.info("Celery Status: %s" % is_celery_working())
         # Validations
         if 'files' not in request.files:
             return jsonify({"data": {}, "error": "No file part uploaded"}), 500
@@ -308,10 +309,9 @@ def upload():
                 filename = secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
-        print "Celery Status: %s" % is_celery_working()
-        task = celery.send_task("identify", args=[filenames], queue="__PACKAGE_NAME__")
-        results = task.get()
-        print "Results: %s" % results
+        # Sending task to MQ
+        task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
+        logger.info("Celery Task Queued with ID: %s" % task)
         return jsonify({"data": {"response": "Success!", "files": filenames}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
