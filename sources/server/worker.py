@@ -29,9 +29,11 @@ def identify(self, filenames):
     self.update_state(state=states.PENDING)
     try:
         logger.info("Identifying files: %s" % filenames)
+        self.update_state(state=states.SUCCESS)
         return True
     except Exception:
         logger.error("Failed!")
+        self.update_state(state=states.FAILURE)
         return False
 
 
