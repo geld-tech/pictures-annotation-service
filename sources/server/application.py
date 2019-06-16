@@ -31,7 +31,7 @@ upload_dir = local_path+'/data/'
 types_list = set(['bmp', 'ico', 'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'])
 max_length = 8*1024*1024  # 8 MB
 # broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
-broker_uri = 'amqp://localhost/'
+broker_uri = 'amqp://localhost//'
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
