@@ -178,7 +178,6 @@ worker-start:
 	@echo ""
 	@sleep 3
 
-
 ## Stop metrics worker
 worker-stop:
 	$(call echo_title, "STOP WORKER DAEMON")
@@ -187,6 +186,17 @@ worker-stop:
 		cd $(SRV_DEV_ENV); \
 		celery multi stopwait worker --pidfile="celery-%n.pid"; \
 		set +x; \
+	fi
+
+## Check worker status
+worker-status:
+	$(call echo_title, "STATUS WORKER DAEMON")
+	@if [ -f "$(SRV_DEV_ENV)/celery-worker.pid" ]; then \
+		celery status; \
+		echo ""; \
+		celery inspect active; \
+	else \
+		echo "No worker daemon running.."; \
 	fi
 
 ## Start web application
