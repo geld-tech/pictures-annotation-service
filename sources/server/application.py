@@ -320,14 +320,6 @@ def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
 
 
-@celery.task
-def identify_picture(filenames):
-    try:
-        return "Done!"
-    except:
-        return "Failed!"
-
-
 if __name__ == "__main__":
     # Parse options
     opts_parser = OptionParser()
