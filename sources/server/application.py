@@ -312,7 +312,6 @@ def upload():
                 filenames.append(filename)
         # Sending task to MQ
         task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
-        #task = celery.send_task("identify", args=[filenames], queue="__PACKAGE_NAME__")
         logger.info("Celery Queued Task ID: %s" % task.task_id)
         return jsonify({"data": {"response": "Success!", "files": filenames}, "task_id": task.task_id}), 200
     else:
