@@ -194,7 +194,7 @@ worker-status:
 	@if [ -f "$(SRV_DEV_ENV)/celery-worker.pid" ]; then \
 		celery status; \
 		echo ""; \
-		celery inspect active; \
+		cd $(SRV_DEV_ENV); celery report -A worker; \
 	else \
 		echo "No worker daemon running.."; \
 	fi
