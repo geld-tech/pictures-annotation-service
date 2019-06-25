@@ -313,8 +313,7 @@ def upload():
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 filenames.append(filename)
         # Sending task to MQ
-        task = identify.send_task("worker.identify", args=[filenames], queue="__PACKAGE_NAME__")
-        # task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
+        task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
         logger.info("Celery Queued Task ID: %s" % task.task_id)
         print "DEBUG: %s" % task.ready()
         return jsonify({"data": {"response": "Success!", "files": filenames}, "task_id": task.task_id}), 200
