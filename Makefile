@@ -250,6 +250,8 @@ mq-stop:
 	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
 		docker rm -f `cat $(LOCAL_DEV_ENV)/rabbitmq.pid`; \
 		rm -f $(LOCAL_DEV_ENV)/rabbitmq.pid; \
+	elif [ -n "`docker ps -a -f 'name=rabbitmq'|grep -iv 'CONTAINER ID'|awk -e '{print $$1}'`" ]; then \
+		docker rm -f `docker ps -a -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'`; \
 	fi
 
 ## Start local development environment
