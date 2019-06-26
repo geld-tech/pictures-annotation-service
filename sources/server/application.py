@@ -55,11 +55,10 @@ app.secret_key = secret_key
 app.debug = True
 
 # Celery Initialisation
-celery = Celery(app.name, backend=broker_uri, broker=broker_uri)
+celery = Celery(app.name, broker=broker_uri)
 celery.conf.update(app.config)
 celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 celery.conf.update(CELERY_BROKER_URL=broker_uri)
-celery.conf.update(CELERY_BROKER_BACKEND=broker_uri)
 celery.task_default_queue = '__PACKAGE_NAME__'
 logger.info("Celery application connected to: %s" % broker_uri)
 
