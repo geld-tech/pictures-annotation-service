@@ -50,8 +50,6 @@ else:
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = upload_dir
 app.config['MAX_CONTENT_LENGTH'] = max_length
-# app.config['CELERY_BROKER_URL'] = broker_uri
-# app.config['CELERY_RESULT_BACKEND'] = broker_uri
 app.url_map.strict_slashes = False
 app.secret_key = secret_key
 app.debug = True
@@ -315,7 +313,6 @@ def upload():
         # Sending task to MQ
         task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
         logger.info("Celery Queued Task ID: %s" % task.task_id)
-        print "DEBUG: %s" % task.ready()
         return jsonify({"data": {"response": "Success!", "files": filenames}, "task_id": task.task_id}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
