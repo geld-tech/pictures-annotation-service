@@ -17,10 +17,9 @@ logger = logging.getLogger('root')
 # Celery Initialisation
 # broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
 broker_uri = 'amqp://localhost//'
-celery = Celery('__PACKAGE_NAME__', backend=broker_uri, broker=broker_uri)
+celery = Celery('__PACKAGE_NAME__', broker=broker_uri)
 celery.conf.update(BROKER_POOL_LIMIT=None, CELERY_TASK_IGNORE_RESULT=True)
 celery.conf.update(CELERY_BROKER_URL=broker_uri)
-celery.conf.update(CELERY_BROKER_BACKEND=broker_uri)
 celery.task_default_queue = '__PACKAGE_NAME__'
 logger.info("Celery worker connected to: %s" % broker_uri)
 
