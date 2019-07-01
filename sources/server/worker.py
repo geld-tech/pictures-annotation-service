@@ -27,7 +27,7 @@ logger.info("Celery worker connected to: %s" % broker_uri)
 @celery.task(bind=True)
 def identify(self, filenames):
     ''' Identify provided pictures '''
-    logger.info("Received request: %s  Parameters: %s" % (self.request.id, filenames))
+    logger.info("Received Request: ID=%s - Parameters=%s" % (self.request.id, filenames))
     self.update_state(state=states.PENDING)
     try:
         logger.info("Identifying files: %s" % filenames)
