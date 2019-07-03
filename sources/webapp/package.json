@@ -16,6 +16,9 @@
     "vue-router": "^3.0.2",
     "vue-step": "^1.3.0"
   },
+  "resolutions": {
+    "eslint-loader": "2.1.2"
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
