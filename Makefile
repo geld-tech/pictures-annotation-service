@@ -107,6 +107,7 @@ vue-dev-tools:
 npm-install: local-dev-env
 	$(call echo_title, "NPM INSTALL")
 	cd $(NPM_DEV_ENV) ; npm install
+	cd $(NPM_DEV_ENV) ; npm install eslint-loader@2.1.2
 
 ## Runs linter on Vue web application files
 npm-lint: npm-install
