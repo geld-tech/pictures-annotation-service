@@ -24,12 +24,3 @@ class Version(Base):
     full_version = Column(String(2048))
     server_id = Column(Integer, ForeignKey('server.id'))
     server = relationship(Server)
-
-
-class Service(Base):
-    __tablename__ = 'service'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(128))
-    uri = Column(String(1024))
-    server_id = Column(Integer, ForeignKey('server.id'))
-    server = relationship(Server)
