@@ -24,3 +24,17 @@ class Version(Base):
     full_version = Column(String(2048))
     server_id = Column(Integer, ForeignKey('server.id'))
     server = relationship(Server)
+
+
+class Picture(Base):
+    __tablename__ = 'picture'
+    id = Column(Integer, primary_key=True)
+    date_time = Column(DateTime(timezone=True), default=datetime.datetime.utcnow)
+    task_id = Column(String(42))
+    filename = Column(String(256))
+    task_timestamp = Column(BigInteger)
+    process_timestamp = Column(BigInteger)
+    result = Column(String(16))
+    identification = Column(String(256))
+    server_id = Column(Integer, ForeignKey('server.id'))
+    server = relationship(Server)
