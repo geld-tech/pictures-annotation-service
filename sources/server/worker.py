@@ -7,12 +7,22 @@ import os
 
 from celery import Celery, states
 
+from modules.Models import Base
+
 # Global variables
 TMP_DIR = '/tmp'
 
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
 logger = logging.getLogger('root')
+
+
+# DB Session
+db_path = local_path+'/data/metrics.sqlite3'
+engine = create_engine('sqlite:///'+db_path)
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+db_session = DBSession()
 
 # Celery Initialisation
 # broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
