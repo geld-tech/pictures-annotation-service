@@ -10,6 +10,7 @@ from celery import Celery, states
 from modules.Models import Base
 
 # Global variables
+local_path = os.path.dirname(os.path.abspath(__file__))
 TMP_DIR = '/tmp'
 
 # Initialisation
