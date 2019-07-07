@@ -4,6 +4,7 @@ from __future__ import absolute_import, unicode_literals
 import logging
 import logging.handlers
 import os
+import socket
 
 from celery import Celery, states
 from sqlalchemy import create_engine
@@ -18,14 +19,18 @@ TMP_DIR = '/tmp'
 # Initialisation
 logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
 logger = logging.getLogger('root')
-
+hostname = socket.gethostname()
 
 # DB Session
 db_path = local_path+'/data/metrics.sqlite3'
 engine = create_engine('sqlite:///'+db_path)
 Base.metadata.bind = engine
+Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
 db_session = DBSession()
+server = Server(hostname=hostname)
+db_session.add(server)
+db_session.commit()
 
 # Celery Initialisation
 # broker_uri = 'amqp://%s:%s@%s/%s' % (os.environ['MQ_USER'], os.environ['MQ_PASS'], os.environ['MQ_HOST'], os.environ['MQ_VAPP'])
