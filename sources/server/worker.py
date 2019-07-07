@@ -7,6 +7,9 @@ import os
 
 from celery import Celery, states
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 from modules.Models import Base
 
 # Global variables
