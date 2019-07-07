@@ -9,7 +9,7 @@ from celery import Celery, states
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from modules.Models import Base
+from modules.Models import Base, Picture
 
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
@@ -40,8 +40,13 @@ logger.info("Celery worker connected to: %s" % broker_uri)
 @celery.task(bind=True)
 def identify(self, filenames):
     ''' Identify provided pictures '''
+    records = []
     logger.info("Received Request: ID=%s - Parameters=%s" % (self.request.id, filenames))
     self.update_state(state=states.PENDING)
+    for filename in filenames:
+        record = Picture(task_id=self.request.id, filename=filename, status="PENDING")
+        db_session.add(record)
+        db_session.commit()
     try:
         logger.info("Identifying files: %s" % filenames)
         self.update_state(state=states.SUCCESS)
