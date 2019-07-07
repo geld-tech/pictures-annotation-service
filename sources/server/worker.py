@@ -6,7 +6,6 @@ import logging.handlers
 import os
 
 from celery import Celery, states
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
