@@ -10,7 +10,7 @@ from celery import Celery, states
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from modules.Models import Base, Picture
+from modules.Models import Base, Picture, Server
 
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
