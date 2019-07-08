@@ -65,6 +65,10 @@ def identify(self, filenames):
         self.update_state(state=states.FAILURE)
         logger.error("Failed!")
         logger.warning("Exception: %s" % e)
+        for filename in filenames:
+            if records[filename].status != "SUCCESS":
+                records[filename].status = "FAILED"
+                db_session.commit()
         return False
 
 
