@@ -49,14 +49,16 @@ def identify(self, filenames):
     logger.info("Received Request: ID=%s - Parameters=%s" % (self.request.id, filenames))
     self.update_state(state=states.PENDING)
     try:
+        # Stores all requested files in pending state
         for filename in filenames:
             records[filename] = Picture(task_id=self.request.id, filename=filename, status="PENDING")
             db_session.add(records[filename])
-            db_session.commit(records[filename])
+            db_session.commit()
+        # Process requested files then update status
         for filename in filenames:
             logger.info("Identifying: %s" % filename)
             records[filename].status = "SUCCESS"
-            db_session.commit(records[filename])
+            db_session.commit()
         self.update_state(state=states.SUCCESS)
         return True
     except Exception, e:
