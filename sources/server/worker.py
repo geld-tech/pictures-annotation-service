@@ -45,13 +45,14 @@ logger.info("Celery worker connected to: %s" % broker_uri)
 @celery.task(bind=True)
 def identify(self, filenames):
     ''' Identify provided pictures '''
+    records = {}
     logger.info("Received Request: ID=%s - Parameters=%s" % (self.request.id, filenames))
     self.update_state(state=states.PENDING)
     try:
         for filename in filenames:
-            record = Picture(task_id=self.request.id, filename=filename, status="PENDING")
-            db_session.add(record)
-            db_session.commit()
+            records[filename] = Picture(task_id=self.request.id, filename=filename, status="PENDING")
+            db_session.add(records[filename])
+            db_session.commit(records[filename])
         logger.info("Identifying files: %s" % filenames)
         self.update_state(state=states.SUCCESS)
         return True
