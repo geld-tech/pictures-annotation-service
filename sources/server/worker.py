@@ -55,7 +55,7 @@ def identify(self, filenames):
             db_session.commit(records[filename])
         for filename in filenames:
             logger.info("Identifying: %s" % filename)
-            records[filename].status="SUCCESS"
+            records[filename].status = "SUCCESS"
             db_session.commit(records[filename])
         self.update_state(state=states.SUCCESS)
         return True
