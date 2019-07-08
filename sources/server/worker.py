@@ -53,7 +53,10 @@ def identify(self, filenames):
             records[filename] = Picture(task_id=self.request.id, filename=filename, status="PENDING")
             db_session.add(records[filename])
             db_session.commit(records[filename])
-        logger.info("Identifying files: %s" % filenames)
+        for filename in filenames:
+            logger.info("Identifying: %s" % filename)
+            records[filename].status="SUCCESS"
+            db_session.commit(records[filename])
         self.update_state(state=states.SUCCESS)
         return True
     except Exception:
