@@ -47,11 +47,11 @@ def identify(self, filenames):
     ''' Identify provided pictures '''
     logger.info("Received Request: ID=%s - Parameters=%s" % (self.request.id, filenames))
     self.update_state(state=states.PENDING)
-    for filename in filenames:
-        record = Picture(task_id=self.request.id, filename=filename, status="PENDING")
-        db_session.add(record)
-        db_session.commit()
     try:
+        for filename in filenames:
+            record = Picture(task_id=self.request.id, filename=filename, status="PENDING")
+            db_session.add(record)
+            db_session.commit()
         logger.info("Identifying files: %s" % filenames)
         self.update_state(state=states.SUCCESS)
         return True
