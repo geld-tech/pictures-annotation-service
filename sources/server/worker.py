@@ -76,3 +76,8 @@ def identify(self, filenames):
 def list():
     ''' List working directory contents '''
     return os.listdir(TMP_DIR)
+
+
+def identify_picture(filename):
+    ''' Identify picture provided '''
+    return "cat"
