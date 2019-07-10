@@ -220,7 +220,7 @@ mq-start:
 	@echo ""
 	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
 		echo "Message queue running"; \
-		docker ps -f "name=rabbitmq"; \
+		docker ps -af "name=rabbitmq"; \
 	else \
 		docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 rabbitmq:3; \
 		sleep 3; \
@@ -231,7 +231,7 @@ mq-start:
 mq-status:
 	$(call echo_title, "STATUS MESSAGE QUEUE")
 	@if [ -f "$(LOCAL_DEV_ENV)/rabbitmq.pid" ]; then \
-		docker ps -f "name=rabbitmq"; \
+		docker ps -af "name=rabbitmq"; \
 		echo ""; \
 		docker exec -it `docker ps -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'` /bin/bash -c "rabbitmqctl list_vhosts"; \
 		echo ""; \
