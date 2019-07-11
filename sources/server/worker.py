@@ -57,6 +57,7 @@ def identify(self, filenames):
         # Process requested files then update status
         for filename in filenames:
             logger.info("Identifying: %s" % filename)
+            records[filename].identification = identify_picture(filename)
             records[filename].status = "SUCCESS"
             db_session.commit()
         self.update_state(state=states.SUCCESS)
