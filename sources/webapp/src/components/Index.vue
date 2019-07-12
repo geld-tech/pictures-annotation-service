@@ -50,7 +50,8 @@ export default {
   data() {
     return {
       error: '',
-      files: []
+      files: [],
+      taskId: ''
     }
   },
   methods: {
@@ -58,8 +59,9 @@ export default {
       evt.preventDefault()
       if (this.files) {
         postFiles(this.files)
-          .then(() => {
+          .then(response => {
             this.$refs['files-input'].reset()
+            this.taskId = response.data.task_id
           })
           .catch(err => {
             /* Reset our form values */
