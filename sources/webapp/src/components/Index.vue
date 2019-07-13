@@ -61,7 +61,7 @@ export default {
         postFiles(this.files)
           .then(response => {
             this.$refs['files-input'].reset()
-            this.taskId = response.data.task_id
+            this.taskId = response.task_id
           })
           .catch(err => {
             /* Reset our form values */
