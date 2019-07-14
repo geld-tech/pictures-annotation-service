@@ -351,7 +351,7 @@ if __name__ == "__main__":
     opts_parser.add_option('--debug', action='store_true', dest='debug', help='Print verbose output.', default=False)
     options, args = opts_parser.parse_args()
     if options.debug:
-        logger.setLevel(logging.DEBUG
-       logger.debug('Enabled DEBUG logging level.')
+        logger.setLevel(logging.DEBUG)
+        logger.debug('Enabled DEBUG logging level.')
     logger.info('Options parsed')
     app.run(host='0.0.0.0')
