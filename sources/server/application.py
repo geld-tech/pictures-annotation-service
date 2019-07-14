@@ -114,7 +114,7 @@ def status():
         offset = 1  # GMT+1 as Default Timezone offset
         if request.headers.get('offset'):
             offset = int(request.headers.get('offset'))
-        logger.debug("Timezone offeset: %s" % offset)
+        logger.debug("Timezone offset: %s" % offset)
 
         return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
