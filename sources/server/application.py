@@ -329,10 +329,13 @@ def is_celery_working():
 
 @app.route("/tasks/", strict_slashes=False)
 def tasks():
-
+    pictures = []
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
-        return jsonify({"data": {"response": "Success!", "task_id": task_id}}), 200
+        if task_id:
+        for picture in db_session.query(Picture.task_id=task_id):
+            pictures.append(picture)
+        return jsonify({"data": {"response": "Success!", "task_id": task_id, "pictures": pictures}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
@@ -348,7 +351,7 @@ if __name__ == "__main__":
     opts_parser.add_option('--debug', action='store_true', dest='debug', help='Print verbose output.', default=False)
     options, args = opts_parser.parse_args()
     if options.debug:
-        logger.setLevel(logging.DEBUG)
-        logger.debug('Enabled DEBUG logging level.')
+        logger.setLevel(logging.DEBUG
+       logger.debug('Enabled DEBUG logging level.')
     logger.info('Options parsed')
     app.run(host='0.0.0.0')
