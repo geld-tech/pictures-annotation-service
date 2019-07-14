@@ -333,7 +333,7 @@ def tasks():
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
-            for picture in db_session.query(Picture.task_id=task_id):
+            for picture in db_session.query(Picture).filter(Picture.task_id=task_id):
                 pictures.append(picture)
         return jsonify({"data": {"response": "Success!", "task_id": task_id, "pictures": pictures}}), 200
     else:
