@@ -20,7 +20,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
 
-from modules.Models import Base
+from modules.Models import Base, Picture
 from worker import identify
 
 # Global config
