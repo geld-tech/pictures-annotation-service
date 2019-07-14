@@ -334,8 +334,11 @@ def tasks():
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
             for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
-                pictures.append(picture)
-        return jsonify({"data": {"response": "Success!", "task_id": task_id, "pictures": pictures}}), 200
+                pictures.append({"task_id": picture.task_id,
+                                "filename": picture.filename,
+                                "status": picture.status,
+                                "identification": picture.identification})
+        return jsonify({"data": {"response": "Success!", "pictures": pictures}}), 200
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
