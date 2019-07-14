@@ -327,6 +327,16 @@ def is_celery_working():
     return bool(result)
 
 
+@app.route("/tasks/", strict_slashes=False)
+def tasks():
+
+    if request.method == 'GET':
+        task_id = request.args.get('task_id', default='', type=str)
+        return jsonify({"data": {"response": "Success!", "task_id": task_id}}), 200
+    else:
+        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
