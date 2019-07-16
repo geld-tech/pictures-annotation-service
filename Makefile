@@ -17,6 +17,9 @@ HOST=0.0.0.0
 PORT=5000
 WAIT=10
 
+# Tasks
+TASK_ID=
+
 # Conditional Processing
 NPM_AUDIT=true
 
@@ -168,6 +171,11 @@ webapp-config: webapp-settings
 upload:
 	$(call echo_title, "UPLOAD")
 	@curl -v -H "Content-Type: multipart/form-data" -X POST -F "files=@tests/wolf_01.jpg" http://0.0.0.0:5000/upload
+
+## Check status of a task
+task-status:
+	$(call echo_title, "TASK STATUS")
+	@curl -v -H "Content-Type: multipart/form-data" -X GET http://0.0.0.0:5000/upload/$(TASK_ID)
 
 ## Start metrics worker
 worker-start:
