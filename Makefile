@@ -18,7 +18,7 @@ PORT=5000
 WAIT=10
 
 # Tasks
-TASK_ID=
+TASK_ID=12345678-abcd-cdef-abef-ba0987654321
 
 # Conditional Processing
 NPM_AUDIT=true
