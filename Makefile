@@ -175,7 +175,7 @@ upload:
 ## Check status of a task
 task-status:
 	$(call echo_title, "STATUS TASK ID: $(TASK_ID)")
-	@curl -v -H "Content-Type: multipart/form-data" -X GET http://0.0.0.0:5000/tasks/$(TASK_ID)
+	@curl -v -H "Content-Type: multipart/form-data" -X GET http://0.0.0.0:5000/tasks?task_id=$(TASK_ID)
 
 ## Start metrics worker
 worker-start:
