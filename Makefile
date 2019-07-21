@@ -174,7 +174,7 @@ upload:
 
 ## Check status of a task
 task-status:
-	$(call echo_title, "STATUS TASK ID: $(TASK_ID)")
+	$(call echo_title, "TASK ID STATUS: $(TASK_ID)")
 	@echo "NOTE: Provide task ID via command line"
 	@echo ""
 	@echo "        make task-status TASK_ID=<task_id>"
