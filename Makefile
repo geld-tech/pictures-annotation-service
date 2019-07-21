@@ -177,7 +177,7 @@ task-status:
 	$(call echo_title, "STATUS TASK ID: $(TASK_ID)")
 	@echo "NOTE: Provide task ID via command line"
 	@echo ""
-	@echo "		make task-status TASK_ID=<task_id>"
+	@echo "        make task-status TASK_ID=<task_id>"
 	@echo ""
 	@curl -v -H "Content-Type: multipart/form-data" -X GET http://0.0.0.0:5000/tasks?task_id=$(TASK_ID)
 
