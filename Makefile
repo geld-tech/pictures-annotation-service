@@ -172,7 +172,7 @@ upload:
 	$(call echo_title, "UPLOAD")
 	@curl -v -H "Content-Type: multipart/form-data" -X POST -F "files=@tests/wolf_01.jpg" http://0.0.0.0:5000/upload
 
-## Check status of a task
+## Check status of a task (Provide task ID via CLI: make task-status TASK_ID=<task_id>)
 task-status:
 	$(call echo_title, "TASK ID STATUS: $(TASK_ID)")
 	@echo "NOTE: Provide task ID via command line"
