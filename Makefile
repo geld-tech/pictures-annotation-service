@@ -175,7 +175,9 @@ upload:
 ## Check status of a task
 task-status:
 	$(call echo_title, "STATUS TASK ID: $(TASK_ID)")
-	@echo "NOTE: Provide task ID via command line with: make task-status TASK_ID=<task_id>"
+	@echo "NOTE:"
+	@echo "  Provide task ID via command line with: make task-status TASK_ID=<task_id>"
+	@echo ""
 	@curl -v -H "Content-Type: multipart/form-data" -X GET http://0.0.0.0:5000/tasks?task_id=$(TASK_ID)
 
 ## Start metrics worker
