@@ -11,14 +11,14 @@ PACKAGE_AUTHOR=geld.tech
 PACKAGE_VERSION=0.0.1
 PACKAGE_DATE=01-01-1970
 
+# Tasks
+TASK_ID=12345678-abcd-cdef-abef-ba0987654321
+
 # UI Tests
 PROTO=http
 HOST=0.0.0.0
 PORT=5000
 WAIT=10
-
-# Tasks
-TASK_ID=12345678-abcd-cdef-abef-ba0987654321
 
 # Conditional Processing
 NPM_AUDIT=true
