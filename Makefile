@@ -60,6 +60,10 @@ save-cache:
 	    mv $(LOCAL_DEV_ENV)/webapp/node_modules/ $(LOCAL_CACHE) ||: ; \
 	fi
 
+## Check pre-requisites are installed
+check-prereq:
+	$(call echo_title, "CHECK PRE-REQUISITES")
+
 ## Sort Python import statements
 isort:
 	$(call echo_title, "PYTHON ISORT")
