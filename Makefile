@@ -30,6 +30,12 @@ export MQ_HOST:=localhost
 export MQ_VAPP:=$(PACKAGE_NAME)
 
 
+## Start local development environment
+start: all mq-start worker-start webapp-start
+
+## Stop local development environment
+stop: worker-stop webapp-stop mq-stop
+
 ## Run all targets locally
 all: check-prereq stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
 	@echo "Build completed successfully!"
@@ -271,12 +277,6 @@ mq-stop:
 	elif [ -n "`docker ps -a -f 'name=rabbitmq'|grep -iv 'CONTAINER ID'|awk -e '{print $$1}'`" ]; then \
 		docker rm -f `docker ps -a -f "name=rabbitmq"|grep -iv "CONTAINER ID"|awk -e '{print $$1}'`; \
 	fi
-
-## Start local development environment
-start: all mq-start worker-start webapp-start
-
-## Stop local development environment
-stop: worker-stop webapp-stop mq-stop
 
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
