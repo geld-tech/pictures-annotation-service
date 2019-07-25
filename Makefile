@@ -45,16 +45,16 @@ clean: stop clean-pyc
 	$(call echo_title, "LOCAL DEV ENV CLEANUP")
 	rm -rf $(LOCAL_DEV_ENV)
 
+## Clean all files including cache for NPM
+clean-all: clean
+	$(call echo_title, "CACHE FILES CLEANUP")
+	-rm -rf $(LOCAL_CACHE)
+
 ## Remove python artifacts
 clean-pyc:
 	$(call echo_title, "PYTHON FILES CLEANUP")
 	find . -name '*.pyc' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
-
-## Clean all files including cache for NPM
-clean-all: clean
-	$(call echo_title, "CACHE FILES CLEANUP")
-	-rm -rf $(LOCAL_CACHE)
 
 ## Save NPM cache
 save-cache:
