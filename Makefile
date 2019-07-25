@@ -301,7 +301,7 @@ docker-run-deb:
 ## Validate latest .rpm package on a local CentOS image with Docker
 docker-run-rpm:
 	$(call echo_title, "DOCKER RUN RPM")
-	sudo docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum clean all ; \
+	docker run -i -t -p 8005:8005 --rm centos:7 /bin/bash -c ' yum clean all ; \
 		yum install -y python wget vim ; \
 		yum install -y epel-release ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
