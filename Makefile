@@ -63,7 +63,7 @@ save-cache:
 ## Check pre-requisites are installed
 check-prereq:
 	$(call echo_title, "CHECK PRE-REQUISITES")
-	if [ ! -f "/usr/bin/isort" ]; then echo "Python isort not found.. Install and try again"; exit 127; fi
+	@if [ ! -f "/usr/bin/isort" ]; then echo "Python isort not found.. Install and try again"; exit 127; fi
 
 ## Sort Python import statements
 isort:
