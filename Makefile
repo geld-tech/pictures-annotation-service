@@ -31,7 +31,7 @@ export MQ_VAPP:=$(PACKAGE_NAME)
 
 
 ## Run all targets locally
-all: stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
+all: check-prereq stop save-cache clean isort lint test local-dev-env vue-dev-tools npm-install npm-lint npm-audit npm-build webapp-setup webapp-settings
 	@echo "Build completed successfully!"
 
 ## Remove all local build artifacts
