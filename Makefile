@@ -31,7 +31,7 @@ export MQ_VAPP:=$(PACKAGE_NAME)
 
 
 ## Start local development environment
-start: all mq-start worker-start webapp-start
+start: check-prereq all mq-start worker-start webapp-start
 
 ## Stop local development environment
 stop: worker-stop webapp-stop mq-stop
