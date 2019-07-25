@@ -282,7 +282,7 @@ mq-stop:
 ## Validate latest .deb package on a local Ubuntu image with Docker
 docker-run-deb:
 	$(call echo_title, "DOCKER RUN DEB")
-	sudo docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c ' apt clean all && apt update ; \
+	docker run -i -t -p 8005:8005 --rm ubuntu:xenial /bin/bash -c ' apt clean all && apt update ; \
 		apt install -y python wget vim ; \
 		wget https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl.py ; \
 		cp /usr/bin/systemctl /usr/bin/systemctl.bak ; \
