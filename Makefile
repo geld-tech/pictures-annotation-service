@@ -69,10 +69,10 @@ save-cache:
 ## Check pre-requisites are installed
 check-prereq:
 	$(call echo_title, "CHECK PRE-REQUISITES")
-	@if [ ! -f "/usr/bin/isort" ] && [ ! -f "/usr/bin/isort" ]; then echo "Python Isort not found.. Install and try again"; exit 127; fi
-	@if [ ! -f "/usr/bin/flake8" ]; then echo "Python Flake8 not found.. Install and try again"; exit 127; fi
-	@if [ ! -f "/usr/local/bin/npm" ] && [ ! -f "/usr/bin/npm" ]; then echo "Node.js NPM not found.. Install and try again"; exit 127; fi
-	@if [ ! -f "/usr/bin/celery" ]; then echo "Python Celery found.. Install and try again"; exit 127; fi
+	@if [ ! -f "/usr/bin/isort" ]  && [ ! -f "/usr/local/bin/isort" ]; then echo "Python Isort not found.. Install and try again"; exit 127; fi
+	@if [ ! -f "/usr/bin/flake8" ] && [ ! -f "/usr/local/bin/flake8" ]; then echo "Python Flake8 not found.. Install and try again"; exit 127; fi
+	@if [ ! -f "/usr/bin/npm" ]    && [ ! -f "/usr/local/bin/npm" ]; then echo "Node.js NPM not found.. Install and try again"; exit 127; fi
+	@if [ ! -f "/usr/bin/celery" ] && [ ! -f "/usr/local/bin/celery" ]; then echo "Python Celery found.. Install and try again"; exit 127; fi
 
 ## Sort Python import statements
 isort:
