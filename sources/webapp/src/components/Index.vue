@@ -33,7 +33,12 @@
             </b-row>
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
-                    <br />
+                    <div v-if="taskId">
+                        <p><strong>Task ID</strong> {{taskId}}</p>
+                    </div>
+                    <div v-else>
+                        <br />
+                    </div>
                 </b-col>
             </b-row>
         </div>
