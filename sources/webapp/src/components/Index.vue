@@ -36,6 +36,7 @@
                     <div v-if="taskId">
                         <p><strong>Task ID</strong> {{ taskId }}</p>
                         <p><strong>Result</strong> {{ result }}</p>
+                        <p><strong>Pictures</strong> {{ pictures }}</p>
                     </div>
                     <div v-else>
                         <br />
@@ -58,16 +59,19 @@ export default {
       error: '',
       files: [],
       taskId: '',
-      result: ''
+      result: '',
+      pictures: []
     }
   },
   watch: {
     'taskId': function(value) {
         if (value != '') {
-          this.sleep(3000)
+          var start = Date.now()
+          while (Date.now() < start + 3000)
           getTaskStatus(value)
             .then(response => {
-              this.result = response.task_id
+              this.result = response.data
+              this.result = response.data.pictures
             })
             .catch(err => {
               /* Reset our form values */
@@ -95,9 +99,6 @@ export default {
     onReset(evt) {
       evt.preventDefault()
       this.$refs['files-input'].reset()
-    },
-    sleep(delay) {
-      setTimeout(() => this.result = '', delay)
     }
   }
 }
