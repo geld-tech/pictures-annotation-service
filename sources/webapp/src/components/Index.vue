@@ -35,7 +35,7 @@
                 <b-col sm="12">
                     <div v-if="taskId">
                         <p><strong>Task ID</strong> {{ taskId }}</p>
-                        <p><strong>Result</strong> {{ results }}</p>
+                        <p><strong>Results</strong> {{ results }}</p>
                     </div>
                     <div v-else>
                         <br />
