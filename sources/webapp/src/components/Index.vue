@@ -36,7 +36,6 @@
                     <div v-if="taskId">
                         <p><strong>Task ID</strong> {{ taskId }}</p>
                         <p><strong>Result</strong> {{ result }}</p>
-                        <p><strong>Pictures</strong> {{ pictures }}</p>
                     </div>
                     <div v-else>
                         <br />
@@ -59,8 +58,7 @@ export default {
       error: '',
       files: [],
       taskId: '',
-      result: '',
-      pictures: []
+      results: ''
     }
   },
   watch: {
@@ -68,8 +66,7 @@ export default {
         if (value != '') {
           getTaskStatus(value)
             .then(response => {
-              this.result = response.data
-              this.pictures = response.data.pictures
+              this.results = response.data.pictures
             })
             .catch(err => {
               /* Reset our form values */
