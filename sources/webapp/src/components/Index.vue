@@ -66,8 +66,7 @@ export default {
   watch: {
     'taskId': function(value) {
         if (value != '') {
-          var start = Date.now()
-          while (Date.now() < start + 3000)
+          this.sleep(3000)
           getTaskStatus(value)
             .then(response => {
               this.result = response.data
@@ -100,6 +99,9 @@ export default {
       evt.preventDefault()
       this.$refs['files-input'].reset()
     }
+    },
+    sleep(delay) {
+      setTimeout(() => this.result = '', delay)
   }
 }
 </script>
