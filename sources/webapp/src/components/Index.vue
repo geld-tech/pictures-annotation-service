@@ -64,11 +64,11 @@ export default {
         if (value != ''){
          getTaskStatus(value)
            .then(response => {
-             var response = response.task_id
+             var result = response.task_id
            })
            .catch(err => {
              /* Reset our form values */
-             var response = ''
+             var result = ''
            })
         }
     }
