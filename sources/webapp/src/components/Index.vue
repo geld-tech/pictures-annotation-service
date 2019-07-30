@@ -35,6 +35,7 @@
                 <b-col sm="12">
                     <div v-if="taskId">
                         <p><strong>Task ID</strong> {{ taskId }}</p>
+                        <p><strong>Result</strong> {{ result }}</p>
                     </div>
                     <div v-else>
                         <br />
@@ -56,13 +57,13 @@ export default {
     return {
       error: '',
       files: [],
-      taskId: ''
+      taskId: '',
+      result: ''
     }
   },
   watch: {
     'taskId': function(value){
         if (value != ''){
-          var result = '' 
           getTaskStatus(value)
             .then(response => {
               result = response.task_id
@@ -71,7 +72,6 @@ export default {
               /* Reset our form values */
               result = err.message
             })
-          console.log(result)
         }
     }
   },
