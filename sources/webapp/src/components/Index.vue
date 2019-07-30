@@ -66,11 +66,11 @@ export default {
         if (value != ''){
           getTaskStatus(value)
             .then(response => {
-              result = response.task_id
+              this.result = response.task_id
             })
             .catch(err => {
               /* Reset our form values */
-              result = err.message
+              this.result = err.message
             })
         }
     }
