@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { postFiles } from '@/api'
+import { postFiles, getTaskStatus } from '@/api'
 
 export default {
   name: 'Info',
