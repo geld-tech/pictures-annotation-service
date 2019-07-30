@@ -43,3 +43,7 @@ export function deauthenticate() {
 export function getConfig() {
   return axios.get('/setup/config/').then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
+
+export function getTaskStatus(taskId) {
+  return axios.get('/tasks?task_id=' + taskId).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+}
