@@ -59,6 +59,20 @@ export default {
       taskId: ''
     }
   },
+  watch: {
+    'taskId': function(value){
+        if (value != ''){
+         getTaskStatus(value)
+           .then(response => {
+             var response = response.task_id
+           })
+           .catch(err => {
+             /* Reset our form values */
+             var response = ''
+           })
+        }
+    }
+  },
   methods: {
     onSubmit(evt) {
       evt.preventDefault()
