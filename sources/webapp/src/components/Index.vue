@@ -70,7 +70,7 @@ export default {
           getTaskStatus(value)
             .then(response => {
               this.result = response.data
-              this.result = response.data.pictures
+              this.pictures = response.data.pictures
             })
             .catch(err => {
               /* Reset our form values */
@@ -98,10 +98,10 @@ export default {
     onReset(evt) {
       evt.preventDefault()
       this.$refs['files-input'].reset()
-    }
     },
     sleep(delay) {
       setTimeout(() => this.result = '', delay)
+    }
   }
 }
 </script>
