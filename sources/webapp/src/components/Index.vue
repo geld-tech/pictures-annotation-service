@@ -34,7 +34,7 @@
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
                     <div v-if="taskId">
-                        <p><strong>Task ID</strong> {{taskId}}</p>
+                        <p><strong>Task ID</strong> {{ taskId }}</p>
                     </div>
                     <div v-else>
                         <br />
