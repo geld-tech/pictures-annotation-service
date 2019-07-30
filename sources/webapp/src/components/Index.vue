@@ -62,14 +62,16 @@ export default {
   watch: {
     'taskId': function(value){
         if (value != ''){
-         getTaskStatus(value)
-           .then(response => {
-             var result = response.task_id
-           })
-           .catch(err => {
-             /* Reset our form values */
-             var result = ''
-           })
+          var result = '' 
+          getTaskStatus(value)
+            .then(response => {
+              result = response.task_id
+            })
+            .catch(err => {
+              /* Reset our form values */
+              result = err.message
+            })
+          console.log(result)
         }
     }
   },
