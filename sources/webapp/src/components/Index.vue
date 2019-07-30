@@ -66,7 +66,6 @@ export default {
   watch: {
     'taskId': function(value) {
         if (value != '') {
-          this.sleep(3000)
           getTaskStatus(value)
             .then(response => {
               this.result = response.data
@@ -98,9 +97,6 @@ export default {
     onReset(evt) {
       evt.preventDefault()
       this.$refs['files-input'].reset()
-    },
-    sleep(delay) {
-      setTimeout(() => this.result = '', delay)
     }
   }
 }
