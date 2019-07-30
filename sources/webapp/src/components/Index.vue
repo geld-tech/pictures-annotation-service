@@ -64,6 +64,7 @@ export default {
   watch: {
     'taskId': function(value){
         if (value != ''){
+          await sleep(3000)
           getTaskStatus(value)
             .then(response => {
               this.result = response.task_id
