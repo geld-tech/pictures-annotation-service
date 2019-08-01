@@ -38,7 +38,7 @@
                         <p v-if="results"><strong>Results</strong><br />
                             <ul>
                               <li v-for="(result, index) in results" v-bind:key="index">
-                                {{ result }}
+                                <strong>{{ result.task_id }}</strong>: {{ result.filename }} - {{ result.identification }}
                               </li>
                             </ul>
                         </p>
