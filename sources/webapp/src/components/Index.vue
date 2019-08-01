@@ -37,7 +37,7 @@
                         <p><strong>Task ID</strong> {{ taskId }}</p>
                         <p v-if="results"><strong>Results</strong><br />
                             <ul>
-                              <li v-for="(result, index) in results">
+                              <li v-for="(result, index) in results" v-bind:key="index">
                                 {{ result }}
                               </li>
                             </ul>
