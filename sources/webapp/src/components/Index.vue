@@ -38,7 +38,8 @@
                         <p v-if="results"><strong>Results</strong><br />
                             <ul>
                               <li v-for="(result, index) in results" v-bind:key="index">
-                                <strong>{{ result.filename }}</strong> {{ result.identification }}
+                                <b-img src="result.filename" fluid alt="result.filename"></b-img>
+                                <strong>{{ result.identification }}</strong>
                               </li>
                             </ul>
                         </p>
