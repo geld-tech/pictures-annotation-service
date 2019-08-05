@@ -346,6 +346,11 @@ def tasks():
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
+@app.route('/results/<path:path>/<filename:filename>')
+def send_results(path, filename):
+    return send_from_directory('results/' + path, filename)
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return jsonify({"data": "not found", "error": "resource not found"}), 404
