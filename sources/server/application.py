@@ -303,15 +303,20 @@ def upload():
         for f in files:
             if not type_allowed(f.filename):
                 return jsonify({"data": {}, "error": "Filetype not allowed"}), 500
+        # Generates UUID
+        task_id = uuid()
+        # Create directory to store pictures
+        task_dir = os.path.join(app.config['UPLOAD_FOLDER'], task_id)
+        os.makedirs(task_dir)
         # Save file
         filenames = []
         for f in files:
             if f:
                 filename = secure_filename(f.filename)
-                f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                f.save(os.path.join(task_dir, filename))
                 filenames.append(filename)
         # Sending task to MQ
-        task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__")
+        task = identify.apply_async(args=[filenames], queue="__PACKAGE_NAME__", task_id=task_id)
         logger.info("Celery Queued Task ID: %s" % task.task_id)
         return jsonify({"data": {"response": "Success!", "files": filenames}, "task_id": task.task_id}), 200
     else:
