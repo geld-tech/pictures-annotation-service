@@ -354,7 +354,7 @@ def tasks():
 
 @app.route('/results/<path:path>/<path:filename>')
 def send_results(path, filename):
-    results_path = local_path + '/results/' + path, filename
+    results_path = local_path + '/results/' + path
     return send_from_directory(results_path, filename)
 
 
