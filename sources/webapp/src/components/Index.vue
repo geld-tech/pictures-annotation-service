@@ -39,8 +39,6 @@
                             <ul>
                               <li v-for="(result, index) in results" v-bind:key="index">
                                 <b-img v-bind:src="'results/' + result.task_id + '/' + result.filename" v-bind:alt="result.filename" fluid center></b-img>
-                                <br />
-                                <strong>{{ result.filename }}</strong>
                               </li>
                             </ul>
                         </p>
