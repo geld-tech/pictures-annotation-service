@@ -14,7 +14,7 @@ from codecs import encode
 from functools import wraps
 from optparse import OptionParser
 
-from celery import Celery
+from celery import Celery, uuid
 from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from sqlalchemy import create_engine
