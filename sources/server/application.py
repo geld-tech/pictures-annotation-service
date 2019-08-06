@@ -15,7 +15,8 @@ from functools import wraps
 from optparse import OptionParser
 
 from celery import Celery
-from flask import Flask, jsonify, render_template, request, session, send_from_directory
+from flask import (Flask, jsonify, render_template, request,
+                   send_from_directory, session)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
@@ -346,7 +347,7 @@ def tasks():
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
 
-@app.route('/results/<path:path>/<filename:filename>')
+@app.route('/results/<path:path>/<path:filename>')
 def send_results(path, filename):
     return send_from_directory('results/' + path, filename)
 
