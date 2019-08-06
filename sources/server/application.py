@@ -349,7 +349,9 @@ def tasks():
 
 @app.route('/results/<path:path>/<path:filename>')
 def send_results(path, filename):
-    return send_from_directory('results/' + path, filename)
+    print "%s" % path
+    print "%s/data/%s" % (local_path, filename)
+    return send_from_directory(local_path + '/data', filename)
 
 
 @app.errorhandler(404)
