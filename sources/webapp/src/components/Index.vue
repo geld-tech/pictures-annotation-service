@@ -38,7 +38,7 @@
                         <p v-if="results"><strong>Results</strong><br />
                             <ul>
                               <li v-for="(result, index) in results" v-bind:key="index">
-                                <b-img v-bind:src="'results/' + result.task_id + '/' + result.filename" v-bind:alt="result.filename" fluid center thumbnail></b-img>
+                                <b-img v-bind:src="'results/' + result.task_id + '/' + result.filename" v-bind:alt="result.filename" fluid center thumbnail class="image"></b-img>
                               </li>
                             </ul>
                         </p>
@@ -127,12 +127,7 @@ a {
   max-width: 800px;
   margin:  0 auto;
 }
-.Chart {
-  background: #FFFFFF;
-}
-.Chart h2 {
-  margin-top: 0;
-  padding: 15px 0;
-  border-bottom: 1px solid #323d54;
+.image {
+  height: 80px;
 }
 </style>
