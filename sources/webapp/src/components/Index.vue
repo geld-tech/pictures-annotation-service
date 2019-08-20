@@ -128,6 +128,6 @@ a {
   margin:  0 auto;
 }
 .image {
-  height: 80px;
+  height: 161616161616161616161616161616160px;
 }
 </style>
