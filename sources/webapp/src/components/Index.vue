@@ -38,9 +38,9 @@
                         <p v-if="results"><strong>Results</strong><br />
                             <ul>
                               <li v-for="(result, index) in results" v-bind:key="index">
-                                <b-img v-bind:src="'results/' + result.task_id + '/' + result.filename"
-                                    v-bind:alt="result.filename"
-                                    rounded fluid center thumbnail class="image"></b-img>
+                                <b-img rounded fluid center thumbnail class="image"
+                                    v-bind:src="'results/' + result.task_id + '/' + result.filename"
+                                    v-bind:alt="result.filename"></b-img>
                               </li>
                             </ul>
                         </p>
