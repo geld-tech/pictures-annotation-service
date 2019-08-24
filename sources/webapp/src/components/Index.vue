@@ -41,6 +41,13 @@
                                 <b-img rounded fluid center thumbnail class="image"
                                     v-bind:src="'results/' + result.task_id + '/' + result.filename"
                                     v-bind:alt="result.filename"></b-img>
+                                <b-card
+                                    overlay
+                                    v-bind:img-src="'results/' + result.task_id + '/' + result.filename"
+                                    v-bind:img-alt="result.filename"
+                                    text-variant="white"
+                                    v-bind:title="result.filename"
+                                    sub-title="result.identification"></b-card>
                               </li>
                             </ul>
                         </p>
