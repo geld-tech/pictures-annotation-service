@@ -48,7 +48,7 @@
                                     v-bind:img-alt="result.filename"
                                     text-variant="white"
                                     v-bind:title="result.filename"
-                                    sub-title="result.identification"></b-card>
+                                    v-bind:sub-title="result.identification"></b-card>
                               </li>
                             </ul>
                         </p>
