@@ -42,6 +42,7 @@
                                     v-bind:src="'results/' + result.task_id + '/' + result.filename"
                                     v-bind:alt="result.filename"></b-img>
                                 <b-card
+                                    class="image"
                                     overlay
                                     v-bind:img-src="'results/' + result.task_id + '/' + result.filename"
                                     v-bind:img-alt="result.filename"
