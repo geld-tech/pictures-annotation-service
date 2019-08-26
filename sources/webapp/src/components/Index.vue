@@ -40,7 +40,8 @@
                               <li v-for="(result, index) in results" v-bind:key="index">
                                 <b-img rounded fluid center thumbnail class="image"
                                     v-bind:src="'results/' + result.task_id + '/' + result.filename"
-                                    v-bind:alt="result.filename"></b-img>
+                                    v-bind:alt="result.filename"></b-img><br/>
+                                <small>{{ result.identification }}</small>
                               </li>
                             </ul>
                         </p>
