@@ -354,7 +354,7 @@ def tasks():
         if pictures:
             return jsonify({"data": {"response": "Success!", "status": task_status, "pictures": pictures}}), 200
         else:
-            return jsonify({"data": {"response": "Not found!"}, "error": "Requested resource not found"}), 404
+            return jsonify({"data": {"response": "Not found!", "status": task_status}, "error": "Requested resource not found"}), 404
     else:
         return jsonify({"data": {}, "error": "Incorrect request method"}), 500
 
