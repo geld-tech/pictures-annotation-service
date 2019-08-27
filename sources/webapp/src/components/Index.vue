@@ -35,7 +35,9 @@
                 <b-col sm="12">
                     <div v-if="taskId">
                         <p><strong>Task ID</strong> {{ taskId }}</p>
-                        <p v-if="results"><strong>Results</strong><br />
+                        <p v-if="results">
+                            <strong>Results</strong><br />
+                            <small>{{ results.status }}</small>
                             <ul>
                               <li v-for="(result, index) in results" v-bind:key="index">
                                 <b-img rounded fluid center thumbnail class="image"
