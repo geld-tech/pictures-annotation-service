@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 # Local Development
+*.swp
 .local_dev/
 local-dev-env/
 
