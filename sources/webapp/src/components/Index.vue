@@ -69,6 +69,7 @@ export default {
       error: '',
       files: [],
       taskId: '',
+      taskStatus: '',
       results: ''
     }
   },
@@ -77,6 +78,7 @@ export default {
         if (value != '') {
           getTaskStatus(value)
             .then(response => {
+              this.taskStatus = response.data.status
               this.results = response.data.pictures
             })
             .catch(err => {
