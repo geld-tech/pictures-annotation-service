@@ -336,6 +336,7 @@ def is_celery_working():
 @app.route("/tasks/", strict_slashes=False)
 def tasks():
     pictures = []
+    task_status = "COMPLETE"
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
@@ -344,8 +345,11 @@ def tasks():
                                 "filename": picture.filename,
                                 "status": picture.status,
                                 "identification": picture.identification})
+
+        if any([('PENDING' == result['status']) for result in pictures]):
+            task_status = "PENDING"
         if pictures:
-            return jsonify({"data": {"response": "Success!", "pictures": pictures}}), 200
+            return jsonify({"data": {"response": "Success!", "status": task_status, "pictures": pictures}}), 200
         else:
             return jsonify({"data": {"response": "Not found!"}, "error": "Requested resource not found"}), 404
     else:
