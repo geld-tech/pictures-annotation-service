@@ -41,7 +41,7 @@
                                 <b-img rounded fluid center thumbnail class="image"
                                     v-bind:src="'results/' + result.task_id + '/' + result.filename"
                                     v-bind:alt="result.filename"></b-img>
-                                <small>{{ result.identification }}</small>
+                                <p>{{ result.identification }}</p>
                               </li>
                             </ul>
                         </p>
