@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 
 import BootstrapVue from 'bootstrap-vue'
-import { Alert, Collapse, Progress, Table, Navbar } from 'bootstrap-vue/es/components'
+import { Alert, Collapse, Progress, Table, Navbar } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
