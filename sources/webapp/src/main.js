@@ -6,7 +6,8 @@ import router from './router'
 
 import BootstrapVue from 'bootstrap-vue'
 import Alert from 'bootstrap-vue'
-import { Collapse, Progress, Table, Navbar } from 'bootstrap-vue'
+import Collapse from 'bootstrap-vue'
+import { Progress, Table, Navbar } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
