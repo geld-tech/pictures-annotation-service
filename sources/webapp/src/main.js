@@ -7,18 +7,18 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import Alert from 'bootstrap-vue'
 import Collapse from 'bootstrap-vue'
+import Navbar from 'bootstrap-vue'
 import Progress from 'bootstrap-vue'
 import Table from 'bootstrap-vue'
-import Navbar from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 Vue.use(Alert)
 Vue.use(Collapse)
+Vue.use(Navbar)
 Vue.use(Progress)
 Vue.use(Table)
-Vue.use(Navbar)
 
 Vue.config.productionTip = false
 
