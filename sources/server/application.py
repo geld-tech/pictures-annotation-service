@@ -3,6 +3,7 @@
 """
     Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
 """
+from waitress import serve
 import ast
 import base64
 import ConfigParser
