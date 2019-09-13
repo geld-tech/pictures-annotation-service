@@ -3,7 +3,6 @@
 """
     Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
 """
-from waitress import serve
 import ast
 import base64
 import ConfigParser
@@ -23,6 +22,7 @@ from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
 
 from modules.Models import Base, Picture
+from waitress import serve
 from worker import identify
 
 # Global config
@@ -380,4 +380,4 @@ if __name__ == "__main__":
         logger.setLevel(logging.DEBUG)
         logger.debug('Enabled DEBUG logging level.')
     logger.info('Options parsed')
-    app.run(host='0.0.0.0')
+    serve(app, host='0.0.0.0', port=5000)
