@@ -19,10 +19,10 @@ from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from waitress import serve
 from werkzeug.utils import secure_filename
 
 from modules.Models import Base, Picture
-from waitress import serve
 from worker import identify
 
 # Global config
