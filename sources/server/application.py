@@ -19,7 +19,6 @@ from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from waitress import serve
 from werkzeug.utils import secure_filename
 
 from modules.Models import Base, Picture
@@ -372,6 +371,7 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
+    from waitress import serve
     # Parse options
     opts_parser = OptionParser()
     opts_parser.add_option('--debug', action='store_true', dest='debug', help='Print verbose output.', default=False)
