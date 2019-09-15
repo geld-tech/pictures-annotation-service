@@ -41,7 +41,7 @@
 
 ## Description
 
-Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
+Service to annotate uploaded picture(s) using Keras and based on Python Flask and Vue.js.
 
 
 ## Demo
