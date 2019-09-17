@@ -112,7 +112,6 @@ chmod a+x /usr/bin/systemctl
 test -L /bin/systemctl || ln -sf /usr/bin/systemctl /bin/systemctl
 ```
 
-
 ## Usage
 
 * Adds Google Analytics User Agent ID (optional)
