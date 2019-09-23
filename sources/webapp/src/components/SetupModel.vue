@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Google Analytics</h2>
+        <h2>Deep Learning Model</h2>
         <div v-if="ganalyticsIdSet" class="pt-1">
             <p>Analytics UA ID set successfully!</p>
         </div>
