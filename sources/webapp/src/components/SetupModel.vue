@@ -33,7 +33,7 @@ import { getConfig, storeGanalytics } from '@/api'
 import { sanitizeString } from '@/tools/utils'
 
 export default {
-  name: 'SetupGanalytics',
+  name: 'SetupModel',
   props: ['ganalyticsIdSet'],
   data () {
     return {
