@@ -2,7 +2,7 @@
     <div>
         <h2>Deep Learning Model</h2>
         <div v-if="modelFilename" class="pt-1">
-            <p>Analytics UA ID set successfully!</p>
+            <p>Model successfully configured!</p>
         </div>
         <div v-else>
             <p>Enter the Google Analytics UA ID in the field below, then press Submit</p>
