@@ -6,7 +6,7 @@
         </div>
         <div v-else>
             <p>Enter the Google Analytics UA ID in the field below, then press Submit</p>
-            <b-form @submit="onSubmitGaId" @reset="onResetGaId" id="uaid" v-if="show">
+            <b-form @submit="onSubmitModel" @reset="onResetGaId" id="uaid" v-if="show">
                 <b-container fluid>
                   <b-row class="my-1">
                     <b-col sm="5">
@@ -58,7 +58,7 @@ export default {
     }
   },
   methods: {
-    onSubmitGaId(evt) {
+    onSubmitModel(evt) {
       evt.preventDefault()
       var uaid = sanitizeString(this.form.uaid)
       if (uaid !== '') {
