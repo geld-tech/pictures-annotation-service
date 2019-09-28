@@ -5,7 +5,7 @@
             <p>Model successfully configured!</p>
         </div>
         <div v-else>
-            <p>Enter the Google Analytics UA ID in the field below, then press Submit</p>
+            <p>Enter the filename of the model to use the field below, then press Submit</p>
             <b-form @submit="onSubmitModel" @reset="onResetGaId" id="uaid" v-if="show">
                 <b-container fluid>
                   <b-row class="my-1">
