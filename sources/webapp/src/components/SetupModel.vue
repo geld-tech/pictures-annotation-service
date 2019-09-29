@@ -13,7 +13,7 @@
                         <label>Filename</label>
                     </b-col>
                     <b-col sm="7">
-                        <b-form-input type="text" v-model="form.filename" id="uaIdInput" required></b-form-input>
+                        <b-form-input type="text" v-model="form.filename" id="filenameInput" required></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
