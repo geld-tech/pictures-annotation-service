@@ -49,7 +49,7 @@ export default {
   mounted() {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
-      this.getConfig()
+      this.initialConfig()
     }
   },
   computed: {
@@ -79,7 +79,7 @@ export default {
       this.show = false
       this.$nextTick(() => { this.show = true })
     },
-    getConfig() {
+    initialConfig() {
       this.loading = false
       /* Trick to reset/clear native browser form validation state */
       this.show = false
