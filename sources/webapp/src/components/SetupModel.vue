@@ -6,7 +6,7 @@
         </div>
         <div v-else>
             <p>Enter the filename of the model to use the field below, then press Submit</p>
-            <b-form @submit="onSubmitModel" @reset="onResetGaId" id="uaid" v-if="show">
+            <b-form @submit="onSubmitModel" @reset="onResetModel" id="uaid" v-if="show">
                 <b-container fluid>
                   <b-row class="my-1">
                     <b-col sm="5">
