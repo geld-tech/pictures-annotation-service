@@ -18,8 +18,8 @@
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="12">
-                      <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="filenameClearButton">Clear</b-button>
-                      <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="filenameAdminButton">Submit</b-button>
+                      <b-button type="reset" variant="danger" v-bind:disabled="disableButtons" id="filenameClearButton">Clear</b-button>
+                      <b-button type="submit" variant="primary" v-bind:disabled="disableButtons" id="filenameAdminButton">Submit</b-button>
                     </b-col>
                   </b-row>
                 </b-container>
@@ -53,7 +53,7 @@ export default {
     }
   },
   computed: {
-    disableGaIdButtons() {
+    disableButtons() {
       return (this.form.filename === '')
     }
   },
