@@ -6,20 +6,20 @@
         </div>
         <div v-else>
             <p>Enter the filename of the model to use the field below, then press Submit</p>
-            <b-form @submit="onSubmitModel" @reset="onResetModel" id="uaid" v-if="show">
+            <b-form @submit="onSubmitModel" @reset="onResetModel" id="filename" v-if="show">
                 <b-container fluid>
                   <b-row class="my-1">
                     <b-col sm="5">
                         <label>Google Analytics UA ID</label>
                     </b-col>
                     <b-col sm="7">
-                        <b-form-input type="text" v-model="form.uaid" id="uaIdInput" required></b-form-input>
+                        <b-form-input type="text" v-model="form.filename" id="uaIdInput" required></b-form-input>
                     </b-col>
                   </b-row>
                   <b-row class="my-1">
                     <b-col sm="12">
-                      <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="uaidClearButton">Clear</b-button>
-                      <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="uaidAdminButton">Submit</b-button>
+                      <b-button type="reset" variant="danger" v-bind:disabled="disableGaIdButtons" id="filenameClearButton">Clear</b-button>
+                      <b-button type="submit" variant="primary" v-bind:disabled="disableGaIdButtons" id="filenameAdminButton">Submit</b-button>
                     </b-col>
                   </b-row>
                 </b-container>
@@ -38,7 +38,7 @@ export default {
   data () {
     return {
       form: {
-        uaid: ''
+        filename: ''
       },
       initialUaid: '',
       error: '',
@@ -54,26 +54,26 @@ export default {
   },
   computed: {
     disableGaIdButtons() {
-      return (this.form.uaid === '')
+      return (this.form.filename === '')
     }
   },
   methods: {
     onSubmitModel(evt) {
       evt.preventDefault()
-      var uaid = sanitizeString(this.form.uaid)
-      if (uaid !== '') {
+      var filename = sanitizeString(this.form.filename)
+      if (filename !== '') {
         this.error = ''
         /* Trick to reset/clear native browser form validation state */
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
-        storeGanalytics(uaid)
+        storeGanalytics(filename)
           .then(() => {
-            this.$emit('set-ganalytics-uaid', true)
+            this.$emit('set-ganalytics-filename', true)
           })
           .catch(err => {
             /* Reset our form values */
-            this.form.uaid = this.initialUaid
+            this.form.filename = this.initialUaid
             this.error = err.message
           })
       } else {
@@ -83,7 +83,7 @@ export default {
     onResetModel(evt) {
       evt.preventDefault()
       /* Reset our form values */
-      this.form.uaid = this.initialUaid
+      this.form.filename = this.initialUaid
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
@@ -98,7 +98,7 @@ export default {
       getConfig()
         .then(response => {
           this.initialUaid = response.data.ua_id
-          this.form.uaid = this.initialUaid
+          this.form.filename = this.initialUaid
           this.loading = false
         })
         .catch(err => {
