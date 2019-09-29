@@ -97,7 +97,7 @@ export default {
       this.loading = true
       getConfig()
         .then(response => {
-          this.initialFilename = response.data.ua_id
+          this.initialFilename = response.data.model_filename
           this.form.filename = this.initialFilename
           this.loading = false
         })
