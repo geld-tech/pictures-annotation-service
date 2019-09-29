@@ -40,7 +40,7 @@ export default {
       form: {
         filename: ''
       },
-      initialUaid: '',
+      initialFilename: 'model.h5',
       error: '',
       loading: false,
       show: true
