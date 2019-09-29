@@ -17,8 +17,8 @@
                     </setup-password>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
-                    <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
-                    </setup-ganalytics>
+                    <setup-model v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
+                    </setup-model>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
@@ -53,6 +53,7 @@ import vueStep from 'vue-step'
 import { deauthenticate } from '@/api'
 import SetupFirstPage from '@/components/SetupFirstPage'
 import SetupPassword from '@/components/SetupPassword'
+import SetupModel from '@/components/SetupModel'
 import SetupGanalytics from '@/components/SetupGanalytics'
 
 export default {
@@ -62,6 +63,7 @@ export default {
     vueStep,
     'setup-first-page': SetupFirstPage,
     'setup-password': SetupPassword,
+    'setup-model': SetupModel,
     'setup-ganalytics': SetupGanalytics
   },
   data () {
