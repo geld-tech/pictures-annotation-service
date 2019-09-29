@@ -10,7 +10,7 @@
                 <b-container fluid>
                   <b-row class="my-1">
                     <b-col sm="5">
-                        <label>Google Analytics UA ID</label>
+                        <label>Filename</label>
                     </b-col>
                     <b-col sm="7">
                         <b-form-input type="text" v-model="form.filename" id="uaIdInput" required></b-form-input>
