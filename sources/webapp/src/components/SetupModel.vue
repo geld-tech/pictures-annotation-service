@@ -67,17 +67,8 @@ export default {
         this.show = false
         this.$nextTick(() => { this.show = true })
         /* Fetching the data */
-        storeGanalytics(filename)
-          .then(() => {
-            this.$emit('set-ganalytics-filename', true)
-          })
-          .catch(err => {
-            /* Reset our form values */
-            this.form.filename = this.initialFilename
-            this.error = err.message
-          })
       } else {
-        this.error = 'GA UA ID cant be empty!'
+        this.error = 'Model Filename cant be empty!'
       }
     },
     onResetModel(evt) {
