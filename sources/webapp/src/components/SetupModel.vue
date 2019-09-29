@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { getConfig, storeGanalytics } from '@/api'
+import { getConfig } from '@/api'
 import { sanitizeString } from '@/tools/utils'
 
 export default {
@@ -49,7 +49,7 @@ export default {
   mounted() {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
-      this.getGanalyticsConfig()
+      this.getConfig()
     }
   },
   computed: {
@@ -79,7 +79,7 @@ export default {
       this.show = false
       this.$nextTick(() => { this.show = true })
     },
-    getGanalyticsConfig() {
+    getConfig() {
       this.loading = false
       /* Trick to reset/clear native browser form validation state */
       this.show = false
