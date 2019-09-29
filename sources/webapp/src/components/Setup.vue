@@ -20,7 +20,7 @@
                     <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
                     </setup-ganalytics>
                 </div>
-                <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
+                <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
                     <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
                     </setup-ganalytics>
                 </div>
