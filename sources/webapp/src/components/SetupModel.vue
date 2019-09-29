@@ -73,7 +73,7 @@ export default {
           })
           .catch(err => {
             /* Reset our form values */
-            this.form.filename = this.initialUaid
+            this.form.filename = this.initialFilename
             this.error = err.message
           })
       } else {
@@ -83,7 +83,7 @@ export default {
     onResetModel(evt) {
       evt.preventDefault()
       /* Reset our form values */
-      this.form.filename = this.initialUaid
+      this.form.filename = this.initialFilename
       /* Trick to reset/clear native browser form validation state */
       this.show = false
       this.$nextTick(() => { this.show = true })
@@ -97,8 +97,8 @@ export default {
       this.loading = true
       getConfig()
         .then(response => {
-          this.initialUaid = response.data.ua_id
-          this.form.filename = this.initialUaid
+          this.initialFilename = response.data.ua_id
+          this.form.filename = this.initialFilename
           this.loading = false
         })
         .catch(err => {
