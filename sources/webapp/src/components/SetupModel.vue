@@ -80,7 +80,7 @@ export default {
         this.error = 'GA UA ID cant be empty!'
       }
     },
-    onResetGaId(evt) {
+    onResetModel(evt) {
       evt.preventDefault()
       /* Reset our form values */
       this.form.uaid = this.initialUaid
