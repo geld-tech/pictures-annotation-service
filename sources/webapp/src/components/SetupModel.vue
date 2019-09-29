@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Deep Learning Model</h2>
-        <div v-if="modelFilename" class="pt-1">
+        <div v-if="modelSet" class="pt-1">
             <p>Model successfully configured!</p>
         </div>
         <div v-else>
@@ -34,7 +34,7 @@ import { sanitizeString } from '@/tools/utils'
 
 export default {
   name: 'SetupModel',
-  props: ['modelFilename'],
+  props: ['modelSet'],
   data () {
     return {
       form: {
