@@ -20,6 +20,10 @@
                     <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
                     </setup-ganalytics>
                 </div>
+                <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
+                    <setup-ganalytics v-bind:ganalyticsIdSet="ganalyticsIdSet" v-on:set-ganalytics-uaid="ganalyticsIdSet = $event">
+                    </setup-ganalytics>
+                </div>
                 <div v-else class="h-100 d-inline-block pt-5">
                     <h2>Error</h2>
                     <p>Incorrect setup step</p>
@@ -35,7 +39,8 @@
                 v-on:click="nextStep"
                 v-bind:disabled="nowStep == stepList.length ||
                     (nowStep > 1 && !adminPasswordSet) ||
-                    (nowStep > 2 && !ganalyticsIdSet)"
+                    (nowStep > 2 && !modelSet) ||
+                    (nowStep > 3 && !ganalyticsIdSet)"
                 id="nextButton" autofocus>Next</b-button>
             </div>
         </div>
