@@ -17,7 +17,7 @@
                     </setup-password>
                 </div>
                 <div v-else-if="nowStep == 3" class="h-100 d-inline-block pt-5">
-                    <setup-model v-bind:ganalyticsIdSet="modelSet" v-on:set-ganalytics-uaid="modelSet = $event">
+                    <setup-model v-bind:modelSet="modelSet" v-on:set-model="modelSet = $event">
                     </setup-model>
                 </div>
                 <div v-else-if="nowStep == 4" class="h-100 d-inline-block pt-5">
@@ -74,6 +74,7 @@ export default {
       stepperColor: '#0079FB',
       dismissCountDown: 0,
       adminPasswordSet: false,
+      modelSet: false,
       ganalyticsIdSet: false
     }
   },
