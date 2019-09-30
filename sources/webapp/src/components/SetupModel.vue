@@ -49,6 +49,7 @@ export default {
   mounted() {
     var firstSetup = window.settings.firstSetup
     if (!firstSetup) {
+      this.filename = this.initialFilename
       this.initialConfig()
     }
   },
