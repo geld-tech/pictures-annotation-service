@@ -24,10 +24,13 @@ Vue.use(Table)
 
 Vue.use(Vuex)
 
+import { store } from './store/store'
+
 Vue.config.productionTip = false
 
 var vm = new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App),
   components: { App },
