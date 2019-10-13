@@ -60,7 +60,6 @@
 
 <script>
 import { postFiles, getTaskStatus } from '@/api'
-import { store } from '@/store'
 
 export default {
   name: 'Info',
