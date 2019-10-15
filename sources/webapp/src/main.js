@@ -22,8 +22,6 @@ Vue.use(Navbar)
 Vue.use(Progress)
 Vue.use(Table)
 
-Vue.use(Vuex)
-
 import { store } from './store/store'
 
 Vue.config.productionTip = false
