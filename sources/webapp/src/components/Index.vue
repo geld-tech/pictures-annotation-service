@@ -80,7 +80,7 @@ export default {
             .then(response => {
               this.taskStatus = response.data.status
               this.results = response.data.pictures
-              store.commit('increment')
+              this.$store.commit('increment')
             })
             .catch(err => {
               /* Reset our form values */
