@@ -45,6 +45,7 @@
                                     v-bind:alt="result.filename"></b-img>
                                 <p>{{ result.identification }}</p>
                               </li>
+                              <li><p>Store {{ $store.state.count }}</p></li>
                             </ul>
                         </p>
                     </div>
