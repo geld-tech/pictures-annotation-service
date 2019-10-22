@@ -68,7 +68,6 @@ db_path = local_path+'/data/metrics.sqlite3'
 engine = create_engine('sqlite:///'+db_path)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
-db_session = DBSession()
 
 
 def authenticated(func):
@@ -340,12 +339,12 @@ def tasks():
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
-            for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
-                pictures.append({"task_id": picture.task_id,
-                                "filename": picture.filename,
-                                "status": picture.status,
-                                "identification": picture.identification})
-
+            with DBSession() as db_session:
+                for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
+                    pictures.append({"task_id": picture.task_id,
+                                    "filename": picture.filename,
+                                    "status": picture.status,
+                                    "identification": picture.identification})
         if any([('PENDING' == result['status']) for result in pictures]):
             task_status = "PENDING"
         else:
