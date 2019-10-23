@@ -339,12 +339,12 @@ def tasks():
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
-            with DBSession() as db_session:
-                for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
-                    pictures.append({"task_id": picture.task_id,
-                                    "filename": picture.filename,
-                                    "status": picture.status,
-                                    "identification": picture.identification})
+            db_session = DBSession()
+            for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
+                pictures.append({"task_id": picture.task_id,
+                                "filename": picture.filename,
+                                "status": picture.status,
+                                "identification": picture.identification})
         if any([('PENDING' == result['status']) for result in pictures]):
             task_status = "PENDING"
         else:
