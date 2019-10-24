@@ -339,7 +339,7 @@ def tasks():
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
-            db_session = DBSession()
+            db_session = DBSession()  # Session needs to be instantiate in local thread
             for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
                 pictures.append({"task_id": picture.task_id,
                                 "filename": picture.filename,
