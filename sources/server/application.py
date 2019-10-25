@@ -19,6 +19,7 @@ from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import scoped_session
 from werkzeug.utils import secure_filename
 
 from modules.Models import Base, Picture
@@ -67,7 +68,8 @@ logger.info("Celery application connected to: %s" % broker_uri)
 db_path = local_path+'/data/metrics.sqlite3'
 engine = create_engine('sqlite:///'+db_path)
 Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factoryi)
 
 
 def authenticated(func):
@@ -339,12 +341,13 @@ def tasks():
     if request.method == 'GET':
         task_id = request.args.get('task_id', default='', type=str)
         if task_id:
-            db_session = DBSession()  # Session needs to be instantiate in local thread
+            db_session = Session()  # Create thread-local session
             for picture in db_session.query(Picture).filter(Picture.task_id == task_id):
                 pictures.append({"task_id": picture.task_id,
                                 "filename": picture.filename,
                                 "status": picture.status,
                                 "identification": picture.identification})
+            Session.remove()        # Remove thread-local session
         if any([('PENDING' == result['status']) for result in pictures]):
             task_status = "PENDING"
         else:
