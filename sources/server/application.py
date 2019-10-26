@@ -18,8 +18,7 @@ from celery import Celery, uuid
 from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import scoped_session, sessionmaker
 from werkzeug.utils import secure_filename
 
 from modules.Models import Base, Picture
@@ -69,7 +68,7 @@ db_path = local_path+'/data/metrics.sqlite3'
 engine = create_engine('sqlite:///'+db_path)
 Base.metadata.bind = engine
 session_factory = sessionmaker(bind=engine)
-Session = scoped_session(session_factoryi)
+Session = scoped_session(session_factory)
 
 
 def authenticated(func):
