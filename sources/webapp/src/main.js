@@ -21,9 +21,9 @@ Vue.use(Navbar)
 Vue.use(Progress)
 Vue.use(Table)
 
-import { store } from './store/store'
-
 Vue.config.productionTip = false
+
+import { store } from './store/store'
 
 var vm = new Vue({
   el: '#app',
