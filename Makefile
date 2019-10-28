@@ -119,7 +119,7 @@ local-dev-env: clean
 vue-dev-tools:
 	$(call echo_title, "VUE DEVTOOLS")
 	sed -i '/Vue.config.productionTip = false/a Vue.config.devtools = true' $(LOCAL_DEV_ENV)/webapp/src/main.js
-	sed -i '/Vue.config.productionTip = false/a Vue.config.devtools = true' $(LOCAL_DEV_ENV)/webapp/src/store.store.js
+	sed -i '/Vue.config.productionTip = false/a Vue.config.devtools = true' $(LOCAL_DEV_ENV)/webapp/src/store/store.js
 
 ## Install NPM Modules in local dev environment
 npm-install: local-dev-env
