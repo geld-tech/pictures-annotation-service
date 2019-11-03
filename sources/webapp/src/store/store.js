@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
     count: 0,
     task: {
         id: '',
-        status: ''
+        status: '',
+        pictures: {}
     }
   },
   mutations: {
