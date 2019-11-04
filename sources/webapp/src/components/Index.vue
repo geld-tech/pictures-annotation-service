@@ -9,7 +9,7 @@
         </div>
         <div v-else>
             <b-row align-v="start" align-h="around">
-                <b-col sm="10">
+                <b-col sm="12">
                     <div>
                         <b-form-file multiple accept="image/*"
                                 ref="files-input"
