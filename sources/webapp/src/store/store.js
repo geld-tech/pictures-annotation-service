@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import { getTaskStatus } from '@/api'
+
 Vue.use(Vuex)
 
 Vue.config.productionTip = false
