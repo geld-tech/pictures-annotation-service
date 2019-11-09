@@ -35,7 +35,7 @@ export const store = new Vuex.Store({
         commit('decrement')
       }, 1000)
     },
-    async getStatus({ commit }) {
+    async getStatus() {
       getTaskStatus(value)
         .then(response => {
           state.task.status = response.data.status
