@@ -38,7 +38,7 @@ export const store = new Vuex.Store({
     async getStatus({ taskId }) {
       getTaskStatus(taskId)
         .then(response => {
-          state.task.status = response.data.status
+          this.state.task.status = response.data.status
         })
     }
   }
