@@ -147,8 +147,7 @@ npm-audit: npm-install
 	# NPM Audit introduced in npm 6
 	$(call echo_title, "NPM AUDIT")
 	@if [ "$(NPM_AUDIT)" == "true" ]; then \
-		cd $(NPM_DEV_ENV) ; \
-		npm audit ; \
+		-cd $(NPM_DEV_ENV) ; npm audit ; \
 	else \
 		echo "Bypassing audit.." ; \
 	fi
