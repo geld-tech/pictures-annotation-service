@@ -77,6 +77,7 @@ export default {
   watch: {
     'taskId': function(value) {
         if (value != '') {
+          this.$store.dispatch('getStatus', value)
           /*
           getTaskStatus(value)
             .then(response => {
