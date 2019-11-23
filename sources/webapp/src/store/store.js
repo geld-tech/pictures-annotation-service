@@ -24,7 +24,7 @@ export const store = new Vuex.Store({
       state.count--
     },
     setStatus(state, value) {
-      state.task.status = status
+      state.task.status = value
     }
   },
   actions: {
