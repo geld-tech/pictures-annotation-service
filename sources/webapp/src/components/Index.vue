@@ -61,8 +61,7 @@
 </template>
 
 <script>
-//import { postFiles, getTaskStatus } from '@/api'
-import { postFiles } from '@/api'
+import { postFiles, getTaskStatus } from '@/api'
 
 export default {
   name: 'Info',
@@ -80,7 +79,6 @@ export default {
     'taskId': function(value) {
         if (value != '') {
           this.$store.dispatch('getStatus', value)
-          /*
           getTaskStatus(value)
             .then(response => {
               this.taskStatus = response.data.status
@@ -92,7 +90,6 @@ export default {
               // Reset our form values
               this.result = err.message
             })
-          */
         }
     }
   },
