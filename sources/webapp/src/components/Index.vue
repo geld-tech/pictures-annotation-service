@@ -78,7 +78,7 @@ export default {
   watch: {
     'taskId': function(value) {
         if (value != '') {
-          this.$store.dispatch('getStatus', value)
+          this.$store.dispatch('getStatus', {taskId: value})
           getTaskStatus(value)
             .then(response => {
               this.taskStatus = response.data.status
