@@ -23,6 +23,9 @@ export const store = new Vuex.Store({
     decrement(state) {
       state.count--
     },
+    setId(state, value) {
+      state.task.id = value
+    },
     setStatus(state, value) {
       state.task.status = value
     }
