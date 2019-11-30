@@ -26,7 +26,7 @@ export const store = new Vuex.Store({
     setTaskId(state, value) {
       state.task.id = value
     },
-    setStatus(state, value) {
+    setTaskStatus(state, value) {
       state.task.status = value
     }
   },
