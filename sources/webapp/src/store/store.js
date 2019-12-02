@@ -44,6 +44,7 @@ export const store = new Vuex.Store({
     async getStatus({ commit }, payload) {
       getTaskStatus(payload.taskId)
         .then(response => {
+          commit('setTaskId', payload.taskId)
           commit('setTaskStatus', response.data.status)
         })
     }
