@@ -61,8 +61,7 @@
 </template>
 
 <script>
-//import { postFiles, getTaskStatus } from '@/api'
-import { postFiles } from '@/api'
+import { postFiles, getTaskStatus } from '@/api'
 
 export default {
   name: 'Info',
