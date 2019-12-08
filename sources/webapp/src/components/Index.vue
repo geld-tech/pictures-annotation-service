@@ -46,7 +46,7 @@
                                 <p>{{ result.identification }}</p>
                               </li>
                               <li><p>Store {{ $store.state.count }}</p></li>
-                              <li><p>Store {{ $store.state.task.status }}</p></li>
+                              <li><p>Status {{ $store.state.task.status }}</p></li>
                             </ul>
                         </p>
                     </div>
