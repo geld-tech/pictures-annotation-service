@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
     task: {
         id: '',
         status: '',
-        pictures: {}
+        results: {}
     }
   },
   mutations: {
@@ -28,6 +28,9 @@ export const store = new Vuex.Store({
     },
     setTaskStatus(state, value) {
       state.task.status = value
+    },
+    setResults(state, value) {
+      state.task.results = value
     }
   },
   actions: {
