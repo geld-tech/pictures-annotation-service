@@ -36,8 +36,7 @@
                     <div v-if="taskId">
                         <p><strong>Task</strong> {{ taskId }} ({{ $store.state.task.status }})</p>
                         <p v-if="taskId">
-                            <strong>Results</strong><br />
-                            <small>{{ taskStatus }}</small>
+                            <strong>Results</strong>
                             <ul>
                               <li v-for="(result, index) in $store.state.task.results" v-bind:key="index">
                                 <b-img rounded fluid center thumbnail class="image"
