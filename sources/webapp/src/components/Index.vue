@@ -59,6 +59,7 @@
 </template>
 
 <script>
+//import { postFiles, getTaskStatus } from '@/api'
 import { postFiles, getTaskStatus } from '@/api'
 
 export default {
@@ -76,17 +77,17 @@ export default {
   watch: {
     'taskId': function(value) {
         if (value != '') {
-          getTaskStatus(value)
-            .then(response => {
-              this.taskStatus = response.data.status
-              //this.results = response.data.pictures
-              // this.$store.commit('increment')
-              //this.$store.dispatch('incrementAsync')
-            })
-            .catch(err => {
-              // Reset our form values
-              this.result = err.message
-            })
+         // getTaskStatus(value)
+         //   .then(response => {
+         //     this.taskStatus = response.data.status
+         //     //this.results = response.data.pictures
+         //     // this.$store.commit('increment')
+         //     //this.$store.dispatch('incrementAsync')
+         //   })
+         //   .catch(err => {
+         //     // Reset our form values
+         //     this.result = err.message
+         //   })
           this.$store.dispatch('getStatus', {taskId: value})
         }
     }
