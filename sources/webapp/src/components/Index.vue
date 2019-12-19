@@ -76,7 +76,7 @@ export default {
   watch: {
     'taskId': function(value) {
         if (value != '') {
-          /* Sends dispatch action to Vuex */
+          /* Dispatch asynchronous action to Vuex */
           this.$store.dispatch('getStatus', {taskId: value})
         }
     }
