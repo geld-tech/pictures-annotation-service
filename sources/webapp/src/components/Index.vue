@@ -78,6 +78,10 @@ export default {
         if (value != '') {
           /* Dispatch asynchronous action to Vuex */
           this.$store.dispatch('getStatus', {taskId: value})
+            .catch(err => {
+              /* Display error message */
+              this.error = err.message
+            })
         }
     }
   },
