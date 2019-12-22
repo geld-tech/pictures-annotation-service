@@ -145,8 +145,6 @@ npm-audit: npm-install
 	#
 	# Conditionally as not installed on all systems, and can fail due to unresolved vulnerabilities
 	# NPM Audit introduced in npm 6
-	#
-	# XXX Bug FixME
 	$(call echo_title, "NPM AUDIT")
 	@if [ "$(NPM_AUDIT)" == "true" ]; then \
 		cd $(NPM_DEV_ENV) ; npm audit || true; \
