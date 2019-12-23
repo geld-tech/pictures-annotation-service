@@ -131,7 +131,7 @@ npm-lint: npm-install
 	$(call echo_title, "NPM LINT")
 	cd $(NPM_DEV_ENV) ; npm run lint
 
-## Runs NPM audit to flag security issues
+## Runs NPM audit to flag security issues (introduced in NPM 6)
 npm-audit: npm-install
 	# On case of a failure, run conditionally using the - prefix (see command  below):
 	#	-cd $(NPM_DEV_ENV) ; npm audit   # Failures ignored locally with -, but will be executed on Travis before distribution
@@ -144,7 +144,6 @@ npm-audit: npm-install
 	#	/usr/bin/curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 	#
 	# Conditionally as not installed on all systems, and can fail due to unresolved vulnerabilities
-	# NPM Audit introduced in npm 6
 	$(call echo_title, "NPM AUDIT")
 	@if [ "$(NPM_AUDIT)" == "true" ]; then \
 		cd $(NPM_DEV_ENV) ; npm audit || true; \
