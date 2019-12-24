@@ -133,8 +133,10 @@ npm-lint: npm-install
 
 ## Runs NPM audit to flag security issues (introduced in NPM 6)
 npm-audit: npm-install
-	# On case of a failure, run conditionally using the - prefix (see command  below):
-	#	-cd $(NPM_DEV_ENV) ; npm audit   # Failures ignored locally with -, but will be executed on Travis before distribution
+	# To run conditionally, as not installed on all systems, or to ignore some known failures or (yet) unresolved vulnerabilities, use true:
+	# e.g. failures will be ignored on local development, but be enforced on Travis before distribution
+	#
+	#	cd $(NPM_DEV_ENV) ; npm audit || true; \
 	#
 	# Or, upgrade nodejs/npm such as the following on CentOS/EL 7 systems via repository:
 	#	/usr/bin/yum remove -y nodejs
@@ -143,10 +145,9 @@ npm-audit: npm-install
 	#	/bin/rm /etc/yum.repos.d/nodesource*
 	#	/usr/bin/curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 	#
-	# Conditionally as not installed on all systems, and can fail due to unresolved vulnerabilities
 	$(call echo_title, "NPM AUDIT")
 	@if [ "$(NPM_AUDIT)" == "true" ]; then \
-		cd $(NPM_DEV_ENV) ; npm audit || true; \
+		cd $(NPM_DEV_ENV) ; npm audit; \
 	else \
 		echo "Bypassing audit.." ; \
 	fi
