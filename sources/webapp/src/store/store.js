@@ -39,11 +39,6 @@ export const store = new Vuex.Store({
         commit('increment')
       }, 1000)
     },
-    async decrementAsync({ commit }) {
-      setTimeout(() => {
-        commit('decrement')
-      }, 1000)
-    },
     async getStatus({ commit }, payload) {
       getTaskStatus(payload.taskId)
         .then(response => {
