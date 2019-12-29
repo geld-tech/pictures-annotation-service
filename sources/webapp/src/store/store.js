@@ -17,9 +17,6 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    increment(state) {
-      state.count++
-    },
     setTaskId(state, value) {
       state.task.id = value
     },
