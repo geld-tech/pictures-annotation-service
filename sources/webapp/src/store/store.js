@@ -40,7 +40,7 @@ export const store = new Vuex.Store({
             commit('setTaskStatus', response.data.status)
             commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
           })
-        new Promise(resolve => setTimeout(resolve, 250))
+        /* new Promise(resolve => setTimeout(resolve, 250)) */
       }
     }
   }
