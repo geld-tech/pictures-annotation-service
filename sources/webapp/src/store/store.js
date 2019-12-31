@@ -38,6 +38,7 @@ export const store = new Vuex.Store({
         if (state.task.status != 'PENDING') {            
           break;
         } 
+        new Promise(resolve => setTimeout(resolve, 250));
       }
     }
   }
