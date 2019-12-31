@@ -357,7 +357,7 @@ def tasks():
         else:
             return jsonify({"data": {"response": "Not found!", "status": task_status}, "error": "Requested resource not found"}), 404
     else:
-        return jsonify({"data": {}, "error": "Incorrect request method"}), 500
+        return jsonify({"data": {"status": "FAILED"}, "error": "Incorrect request method"}), 500
 
 
 @app.route('/results/<path:path>/<path:filename>')
