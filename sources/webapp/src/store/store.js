@@ -33,16 +33,13 @@ export const store = new Vuex.Store({
   },
   actions: {
     async getStatus({ commit }, payload) {
-      while (true) {
+      while (store.getters.taskStatus != 'PENDING') {
         getTaskStatus(payload.taskId)
           .then(response => {
             commit('setTaskId', payload.taskId)
             commit('setTaskStatus', response.data.status)
             commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
           })
-        if (store.getters.taskStatus != 'PENDING') {            
-          break;
-        } 
         new Promise(resolve => setTimeout(resolve, 250))
       }
     }
