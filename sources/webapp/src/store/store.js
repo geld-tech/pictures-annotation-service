@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
-    getTaskStatus: state => {
+    taskStatus: state => {
       return state.task.status
     }
   },
