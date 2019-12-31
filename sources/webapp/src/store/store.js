@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
   },
   actions: {
     async getStatus({ commit }, payload) {
-      while (store.getters.taskStatus != 'PENDING') {
+      while (store.getters.taskStatus != 'COMPLETE') {
         getTaskStatus(payload.taskId)
           .then(response => {
             commit('setTaskId', payload.taskId)
