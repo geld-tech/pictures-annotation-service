@@ -15,6 +15,11 @@ export const store = new Vuex.Store({
         results: {}
     }
   },
+  getters: {
+    getTaskStatus: state => {
+      return state.task.status
+    }
+  },
   mutations: {
     setTaskId(state, value) {
       state.task.id = value
