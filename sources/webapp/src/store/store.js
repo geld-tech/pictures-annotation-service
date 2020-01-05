@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
   state: {
     task: {
         id: '',
-        status: '',
+        status: 'UNDEFINED',
         results: {}
     }
   },
