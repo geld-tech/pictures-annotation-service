@@ -45,6 +45,22 @@ export const store = new Vuex.Store({
         .catch(err => {
           console.log('ERROR '+err.message)
         })
+      console.log('Checking '+store.getters.taskStatus)
+      if (store.getters.taskStatus != 'COMPLETED'){
+        this.pollInterval = setInterval(
+          getTaskStatus(payload.taskId)
+            .then(response => {
+              console.log('RESPONSE XXX')
+              console.log('RESPONSE '+response.data.status)
+              commit('setTaskId', payload.taskId)
+              commit('setTaskStatus', response.data.status)
+              commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
+            })
+            .catch(err => {
+              console.log('ERROR '+err.message)
+            }), 30000)
+      }
     }
   }
 })
+
