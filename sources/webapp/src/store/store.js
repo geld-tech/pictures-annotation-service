@@ -8,6 +8,7 @@ Vue.use(Vuex)
 Vue.config.productionTip = false
 
 export const store = new Vuex.Store({
+  pollInterval: {},
   state: {
     task: {
         id: '',
