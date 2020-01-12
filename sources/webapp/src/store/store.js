@@ -48,7 +48,7 @@ export const store = new Vuex.Store({
         })
       console.log('Checking '+store.getters.taskStatus)
       if (store.getters.taskStatus != 'COMPLETED'){
-        this.pollInterval = setInterval(
+        store.pollInterval = setInterval(
           getTaskStatus(payload.taskId)
             .then(response => {
               console.log('RESPONSE XXX')
