@@ -55,7 +55,7 @@ export const store = new Vuex.Store({
             console.log('ERROR '+err.message)
           })
         console.log('Done '+store.getters.taskStatus)
-        if (store.getters.taskStatus == 'COMPLETED' || store.getters.taskStatus == 'FAILED') {
+        if (store.getters.taskStatus == 'COMPLETE' || store.getters.taskStatus == 'FAILED') {
           clearInterval(store.pollInterval)
         }
       }, 500)
