@@ -35,32 +35,22 @@ export const store = new Vuex.Store({
   actions: {
     async getStatus({ commit }, payload) {
       console.log('Starting '+store.getters.taskStatus)
-      getTaskStatus(payload.taskId)
-        .then(response => {
-          console.log('RESPONSE XXX')
-          console.log('RESPONSE '+response.data.status)
-          commit('setTaskId', payload.taskId)
-          commit('setTaskStatus', response.data.status)
-          commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
-        })
-        .catch(err => {
-          console.log('ERROR '+err.message)
-        })
-      console.log('Checking '+store.getters.taskStatus)
-      if (store.getters.taskStatus != 'COMPLETED'){
-        store.pollInterval = setInterval(
-          getTaskStatus(payload.taskId)
-            .then(response => {
-              console.log('RESPONSE XXX')
-              console.log('RESPONSE '+response.data.status)
-              commit('setTaskId', payload.taskId)
-              commit('setTaskStatus', response.data.status)
-              commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
-            })
-            .catch(err => {
-              console.log('ERROR '+err.message)
-            }), 30000)
+      while (store.getters.taskStatus != 'COMPLETED') {
+        console.log('Checking '+store.getters.taskStatus)
+        getTaskStatus(payload.taskId)
+          .then(response => {
+            console.log('RESPONSE XXX')
+            console.log('RESPONSE '+response.data.status)
+            commit('setTaskId', payload.taskId)
+            commit('setTaskStatus', response.data.status)
+            commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
+          })
+          .catch(err => {
+            console.log('ERROR '+err.message)
+          })
+        new Promise(resolve => setTimeout(resolve, 500))
       }
+      console.log('Done '+store.getters.taskStatus)
     }
   }
 })
