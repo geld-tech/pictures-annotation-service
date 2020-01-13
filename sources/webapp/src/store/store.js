@@ -39,7 +39,7 @@ export const store = new Vuex.Store({
   actions: {
     async getStatus({ commit }, payload) {
       console.log('Starting '+store.getters.taskStatus)
-      window.setInterval(() => {
+      store.pollInterval = setInterval(() => {
         console.log('Checking '+store.getters.taskStatus)
         getTaskStatus(payload.taskId)
           .then(response => {
