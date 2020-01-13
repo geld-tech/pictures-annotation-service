@@ -56,7 +56,7 @@ export const store = new Vuex.Store({
           logStatus(store)
           clearInterval(store.pollInterval)
         }
-      }, 500)
+      }, 250)
     }
   }
 })
