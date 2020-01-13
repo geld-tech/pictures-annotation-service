@@ -7,10 +7,6 @@ Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
-function logStatus(store) {
-  console.log('Task Status: ' + store.getters.taskStatus)
-}
-
 function logError(msg) {
   console.error('Error: ' + msg)
 }
@@ -53,7 +49,6 @@ export const store = new Vuex.Store({
             logError(err.message)
           })
         if (store.getters.taskStatus == 'COMPLETE' || store.getters.taskStatus == 'FAILED') {
-          /* logStatus(store) */
           clearInterval(store.pollInterval)
         }
       }, 250)
