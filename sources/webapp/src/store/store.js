@@ -55,8 +55,8 @@ export const store = new Vuex.Store({
             console.log('ERROR '+err.message)
           })
         console.log('Done '+store.getters.taskStatus)
-      }
-    }, 5000)
+      }, 5000)
+    }
   }
 })
 
