@@ -8,7 +8,7 @@ Vue.use(Vuex)
 Vue.config.productionTip = false
 
 function logStatus(store) {
-  console.log('Status '+store.getters.taskStatus)
+  console.log('Task Status '+store.getters.taskStatus)
 }
 
 export const store = new Vuex.Store({
@@ -49,13 +49,13 @@ export const store = new Vuex.Store({
             commit('setTaskStatus', response.data.status)
             commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
             console.log('RESPONSE OOO '+store.getters.taskStatus)
-            logStatus(store)
           })
           .catch(err => {
             console.log('ERROR '+err.message)
           })
         console.log('Done '+store.getters.taskStatus)
         if (store.getters.taskStatus == 'COMPLETE' || store.getters.taskStatus == 'FAILED') {
+          logStatus(store)
           clearInterval(store.pollInterval)
         }
       }, 500)
