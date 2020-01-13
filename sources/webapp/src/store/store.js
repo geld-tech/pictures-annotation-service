@@ -7,6 +7,10 @@ Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
+function logStatus(store) {
+  console.log('Status '+store.getters.taskStatus)
+}
+
 export const store = new Vuex.Store({
   pollInterval: {},
   state: {
@@ -43,6 +47,8 @@ export const store = new Vuex.Store({
           commit('setTaskId', payload.taskId)
           commit('setTaskStatus', response.data.status)
           commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
+          console.log('RESPONSE OOO '+store.getters.taskStatus)
+          logStatus(store)
         })
         .catch(err => {
           console.log('ERROR '+err.message)
