@@ -39,22 +39,24 @@ export const store = new Vuex.Store({
   actions: {
     async getStatus({ commit }, payload) {
       console.log('Starting '+store.getters.taskStatus)
-      console.log('Checking '+store.getters.taskStatus)
-      getTaskStatus(payload.taskId)
-        .then(response => {
-          console.log('RESPONSE XXX')
-          console.log('RESPONSE '+response.data.status)
-          commit('setTaskId', payload.taskId)
-          commit('setTaskStatus', response.data.status)
-          commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
-          console.log('RESPONSE OOO '+store.getters.taskStatus)
-          logStatus(store)
-        })
-        .catch(err => {
-          console.log('ERROR '+err.message)
-        })
-      console.log('Done '+store.getters.taskStatus)
-    }
+      window.setInterval(() => {
+        console.log('Checking '+store.getters.taskStatus)
+        getTaskStatus(payload.taskId)
+          .then(response => {
+            console.log('RESPONSE XXX')
+            console.log('RESPONSE '+response.data.status)
+            commit('setTaskId', payload.taskId)
+            commit('setTaskStatus', response.data.status)
+            commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
+            console.log('RESPONSE OOO '+store.getters.taskStatus)
+            logStatus(store)
+          })
+          .catch(err => {
+            console.log('ERROR '+err.message)
+          })
+        console.log('Done '+store.getters.taskStatus)
+      }
+    }, 5000)
   }
 })
 
