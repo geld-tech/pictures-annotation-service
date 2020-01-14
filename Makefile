@@ -131,7 +131,7 @@ npm-lint: npm-install
 	$(call echo_title, "NPM LINT")
 	cd $(NPM_DEV_ENV) ; npm run lint
 
-## Runs NPM audit to flag security issues (introduced in NPM 6)
+## Runs NPM audit to flag security issues (disable with make NPM_AUDIT=false)
 npm-audit: npm-install
 	# To run conditionally, as not installed on all systems, or to ignore some known failures or (yet) unresolved vulnerabilities, use true:
 	# e.g. failures will be ignored on local development, but be enforced on Travis before distribution
