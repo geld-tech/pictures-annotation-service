@@ -149,7 +149,7 @@ npm-audit: npm-install
 	@if [ "$(NPM_AUDIT)" == "true" ]; then \
 		cd $(NPM_DEV_ENV) ; npm audit; \
 	else \
-		echo "Bypassing audit.." ; \
+		echo "Bypassing NPM AUDIT as specified with NPM_AUDIT=$(NPM_AUDIT) .." ; \
 	fi
 
 ## Runs a full build using NPM
