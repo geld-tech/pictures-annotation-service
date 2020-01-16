@@ -37,14 +37,16 @@
                         <p><strong>Task</strong> {{ taskId }} ({{ $store.state.task.status }})</p>
                         <p v-if="taskId">
                             <strong>Results</strong>
-                            <ul>
-                              <li v-for="(result, index) in $store.state.task.results" v-bind:key="index">
-                                <b-img rounded fluid center thumbnail class="image"
-                                    v-bind:src="'results/' + result.task_id + '/' + result.filename"
-                                    v-bind:alt="result.filename"></b-img>
-                                <p>{{ result.identification }}</p>
-                              </li>
-                            </ul>
+                            <div v-if="taskStatus == 'COMPLETED'">
+                              <ul>
+                                <li v-for="(result, index) in $store.state.task.results" v-bind:key="index">
+                                  <b-img rounded fluid center thumbnail class="image"
+                                      v-bind:src="'results/' + result.task_id + '/' + result.filename"
+                                      v-bind:alt="result.filename"></b-img>
+                                  <p>{{ result.identification }}</p>
+                                </li>
+                              </ul>
+                            </div>
                         </p>
                     </div>
                     <div v-else>
