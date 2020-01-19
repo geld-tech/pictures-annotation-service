@@ -136,5 +136,6 @@ a {
 }
 .error {
   color: #e43f3f;
+  font-weight: bold;
 }
 </style>
