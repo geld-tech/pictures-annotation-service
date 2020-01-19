@@ -37,7 +37,7 @@
                         <p><strong>Task</strong> {{ taskId }} ({{ $store.state.task.status }})</p>
                         <p v-if="taskId">
                             <strong>Results</strong>
-                            <ul v-if="taskStatus=='COMPLETE'">
+                            <ul v-if="this.taskStatus=='COMPLETE'">
                               <li v-for="(result, index) in $store.state.task.results" v-bind:key="index">
                                 <b-img rounded fluid center thumbnail class="image"
                                     v-bind:src="'results/' + result.task_id + '/' + result.filename"
