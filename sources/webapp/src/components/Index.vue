@@ -134,4 +134,7 @@ a {
 .image {
   height: 160px;
 }
+.error {
+  color: #e43f3f;
+}
 </style>
