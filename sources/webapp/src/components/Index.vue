@@ -61,7 +61,7 @@
 import { postFiles } from '@/api'
 
 export default {
-  name: 'Info',
+  name: 'Index',
   props: ['loading', 'data', 'labels'],
   data() {
     return {
