@@ -45,7 +45,7 @@
                                 <p>{{ result.identification }}</p>
                               </li>
                             </ul>
-                            <span v-else-if="$store.state.task.status == 'FAILED'">Processing failure..</span>
+                            <span class="error" v-else-if="$store.state.task.status == 'FAILED'">Processing failure..</span>
                         </p>
                     </div>
                     <div v-else>
