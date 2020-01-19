@@ -124,9 +124,6 @@ li {
 a {
   color: #42b983;
 }
-.processesTable{
-  font-size: 14px;
-}
 .container {
   max-width: 800px;
   margin:  0 auto;
