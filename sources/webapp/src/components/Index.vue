@@ -33,7 +33,7 @@
             </b-row>
             <b-row align-v="start" align-h="around">
                 <b-col sm="12">
-                    <div v-if="taskId">
+                    <div v-if="$store.state.task.status != 'UNDEFINED'">
                         <p><strong>Task</strong> {{ taskId }} ({{ $store.state.task.status }})</p>
                         <p v-if="taskId">
                             <strong>Results</strong>
