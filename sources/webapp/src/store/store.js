@@ -43,7 +43,7 @@ export const store = new Vuex.Store({
           .then(response => {
             commit('setTaskId', payload.taskId)
             commit('setTaskStatus', response.data.status)
-            commit('setTaskResults', response.data.pictures)  /* XXX FIXME BUG Change in API*/
+            commit('setTaskResults', response.data.pictures)
           })
           .catch(err => {
             logError(err.message)
