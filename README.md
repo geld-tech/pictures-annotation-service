@@ -49,6 +49,11 @@ Service to annotate uploaded picture(s) using Keras and based on Python Flask an
 A sample demo of the project is hosted on <a href="http://geld.tech">geld.tech</a>.
 
 
+## Architecture
+
+![Architecture](resources/Architecture.png)
+
+
 ## Install
 
 ### Ubuntu/Debian
