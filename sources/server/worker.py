@@ -14,6 +14,7 @@ from modules.Models import Base, Picture, Server
 
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
+config_file = local_path+'/config/settings.cfg'
 TMP_DIR = '/tmp'
 
 # Initialisation
@@ -81,4 +82,11 @@ def list():
 
 def identify_picture(filename):
     ''' Identify picture provided '''
+    global config_file
+    settings = {'model': 'model.h5'}
+    if os.path.isfile(config_file):
+        config = ConfigParser.ConfigParser()
+        config.readfp(open(config_file))
+        if 'model' in config.sections():
+            settings['model'] = config.get('model', 'file')
     return "cat"
