@@ -12,6 +12,10 @@ from sqlalchemy.orm import sessionmaker
 
 from modules.Models import Base, Picture, Server
 
+import platform
+import sys
+import cv2
+
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
