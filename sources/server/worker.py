@@ -16,6 +16,13 @@ import platform
 import sys
 import cv2
 
+
+# Debug Environment
+print("System", platform.system(), "-", platform.release())
+print("Executable", sys.executable)
+print("Python", platform.python_version())
+print("OpenCV", cv2.__version__)
+
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
