@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 from __future__ import absolute_import, unicode_literals
 
+import ConfigParser
 import logging
 import logging.handlers
 import os
 import platform
 import socket
 import sys
-import ConfigParser
 
 from celery import Celery, states
 from sqlalchemy import create_engine
