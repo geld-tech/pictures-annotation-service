@@ -8,6 +8,7 @@ import os
 import platform
 import socket
 import sys
+import tensorflow as tf
 
 from celery import Celery, states
 from sqlalchemy import create_engine
