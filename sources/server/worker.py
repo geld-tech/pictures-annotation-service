@@ -28,10 +28,10 @@ logger = logging.getLogger('root')
 hostname = socket.gethostname()
 
 # Debug Environment
-print("System", platform.system(), "-", platform.release())
-print("Executable", sys.executable)
-print("Python", platform.python_version())
-print("OpenCV", cv2.__version__)
+logger.debug("System", platform.system(), "-", platform.release())
+logger.debug("Executable", sys.executable)
+logger.debug("Python", platform.python_version())
+logger.debug("OpenCV", cv2.__version__)
 
 # DB Session
 db_path = local_path+'/data/metrics.sqlite3'
