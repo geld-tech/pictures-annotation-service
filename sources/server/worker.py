@@ -9,13 +9,13 @@ import platform
 import socket
 import sys
 
-from celery import Celery, states
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 import cv2
 import tensorflow as tf
+
+from celery import Celery, states
 from modules.Models import Base, Picture, Server
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
