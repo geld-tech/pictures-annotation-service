@@ -11,11 +11,11 @@ import sys
 
 import cv2
 import tensorflow as tf
-
 from celery import Celery, states
-from modules.Models import Base, Picture, Server
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from modules.Models import Base, Picture, Server
 
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
