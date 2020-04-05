@@ -14,14 +14,14 @@ from codecs import encode
 from functools import wraps
 from optparse import OptionParser
 
+from celery import Celery, uuid
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 from werkzeug.utils import secure_filename
 
-from celery import Celery, uuid
 from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from modules.Models import Base, Picture
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
 from worker import identify
 
 # Global config
