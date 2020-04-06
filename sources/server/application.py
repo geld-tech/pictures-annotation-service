@@ -31,7 +31,6 @@ except ImportError:
     import ConfigParser  # for Python 2
 
 
-
 # Global config
 local_path = os.path.dirname(os.path.abspath(__file__))
 config_file = local_path+'/config/settings.cfg'
