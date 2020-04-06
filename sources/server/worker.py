@@ -75,7 +75,7 @@ def identify(self, filenames):
             db_session.commit()
         self.update_state(state=states.SUCCESS)
         return True
-    except Exception, e:
+    except Exception as e:
         self.update_state(state=states.FAILURE)
         logger.error("Failed!")
         logger.warning("Exception: %s" % e)
