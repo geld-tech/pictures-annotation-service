@@ -104,7 +104,7 @@ def index():
             session['admin_user'] = True
 
         return render_template('index.html', settings=settings, ga_ua_id=ganalytics_id)
-    except Exception, e:
+    except Exception as e:
         logger.error('Error serving web application: %s' % e)
         return jsonify({'data': {}, 'error': 'Could serve web application, check logs for more details..'}), 500
 
@@ -124,7 +124,7 @@ def status():
         return jsonify({'labels': xaxis_labels,
                         'datasets': datasets,
                         'time_labels': time_labels}), 200
-    except Exception, e:
+    except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         del exc_type
         del exc_obj
@@ -190,7 +190,7 @@ def logout():
     try:
         session.clear()
         return jsonify({"data": {"response": "Logged out successfully!"}}), 200
-    except Exception, e:
+    except Exception as e:
         logger.error('Error while logging out: %s' % e)
         return jsonify({'data': {}, 'error': 'Exception encountered while logging out..'}), 500
 
@@ -240,7 +240,7 @@ def get_ua_id():
             config.readfp(open(config_file))
             if 'ganalytics' in config.sections():
                 ua_id = config.get('ganalytics', 'ua_id')
-    except Exception, e:
+    except Exception as e:
         logger.error('Error while retrieving UA ID: %s' % e)
     finally:
         return ua_id
@@ -288,7 +288,7 @@ def obfuscate(text, decode=False):
             return base64.b64decode(decode(text, 'rot13'))
         else:
             return base64.b64encode(encode(text, 'rot13'))
-    except Exception, e:
+    except Exception as e:
         logger.error('Error while encoding or decoding text: %s' % e)
         return text
 
