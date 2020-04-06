@@ -200,7 +200,7 @@ worker-start:
 	$(call echo_title, "START WORKER DAEMON")
 	@echo "Starting background worker daemon locally, use 'make worker-stop' to terminate.."
 	@echo ""
-	cd $(SRV_DEV_ENV); celery multi start worker -A worker -Q $(PACKAGE_NAME) -c 3 -f "celery-%n.log" -l DEBUG --pidfile="celery-%n.pid" --without-gossip
+	cd $(SRV_DEV_ENV); celery multi start worker -A worker -Q $(PACKAGE_NAME) -c 3 -f "celery-%n.log" -l INFO --pidfile="celery-%n.pid" --without-gossip
 	@echo ""
 	@sleep 3
 
