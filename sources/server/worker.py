@@ -28,7 +28,7 @@ config_file = local_path+'/config/settings.cfg'
 TMP_DIR = '/tmp'
 
 # Initialisation
-logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.DEBUG)
+logging.basicConfig(format='[%(asctime)-15s] [%(threadName)s] %(levelname)s %(message)s', level=logging.INFO)
 logger = logging.getLogger('root')
 hostname = socket.gethostname()
 
