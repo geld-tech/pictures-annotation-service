@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-"""
-    Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
-"""
+
 import ast
 import base64
-try:
-    import configparser as ConfigParser  # for Python 3
-except ImportError:
-    import ConfigParser  # for Python 2
 import logging
 import logging.handlers
 import os
@@ -27,6 +21,16 @@ from flask import (Flask, jsonify, render_template, request,
                    send_from_directory, session)
 from modules.Models import Base, Picture
 from worker import identify
+
+"""
+    Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
+"""
+try:
+    import configparser as ConfigParser  # for Python 3
+except ImportError:
+    import ConfigParser  # for Python 2
+
+
 
 # Global config
 local_path = os.path.dirname(os.path.abspath(__file__))
