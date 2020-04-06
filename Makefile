@@ -228,7 +228,7 @@ worker-status:
 ## Start web application
 webapp-start:
 	$(call echo_title, "START WEB APPLICATION")
-	@python -c  "import os; print os.urandom(24)" > $(SRV_DEV_ENV)/config/secret.uti
+	@python -c  "import os; print(os.urandom(24));" > $(SRV_DEV_ENV)/config/secret.uti
 	@echo "Starting web application locally, use 'make webapp-stop' to terminate.."
 	@echo ""
 	python $(SRV_DEV_ENV)/application.py &
