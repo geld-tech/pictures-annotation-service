@@ -50,7 +50,7 @@ if os.path.isfile(secret_file):
     with open(secret_file, 'r') as file:
         secret_key = file.read()
 else:
-    generate_command = 'python -c  "import os; print os.urandom(24)" > %s' % secret_file
+    generate_command = 'python -c  "import os; print(os.urandom(24));" > %s' % secret_file
     logger.critical('Session secret does not exist! Generate it with: %s' % generate_command)
     sys.exit(-1)
 
