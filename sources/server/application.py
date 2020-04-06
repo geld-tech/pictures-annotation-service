@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
+#
 from __future__ import absolute_import, unicode_literals
 
 import ast
@@ -22,9 +25,6 @@ from flask import (Flask, jsonify, render_template, request,
 from modules.Models import Base, Picture
 from worker import identify
 
-"""
-    Service to annotate uploaded pictures using Keras and based on Python Flask and Vue.js.
-"""
 try:
     import configparser as ConfigParser  # for Python 3
 except ImportError:
