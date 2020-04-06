@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from __future__ import absolute_import, unicode_literals
 
-import ConfigParser
 import logging
 import logging.handlers
 import os
@@ -16,6 +15,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from modules.Models import Base, Picture, Server
+
+try:
+    import configparser as ConfigParser  # for Python 3
+except ImportError:
+    import ConfigParser  # for Python 2
+
 
 # Global variables
 local_path = os.path.dirname(os.path.abspath(__file__))
