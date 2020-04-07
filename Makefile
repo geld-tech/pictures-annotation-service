@@ -114,6 +114,8 @@ local-dev-env: clean
 		mv $(LOCAL_CACHE)/node_modules/ $(LOCAL_DEV_ENV)/webapp/ ||: ; \
 		set +x; \
 	fi
+	@echo "== Prepare H5 model =="
+	cp notebooks/cats_dogs_tlearn_basic_cnn.h5.zip $(LOCAL_DEV_ENV)
 
 ## Ensure Vue application is built with DevTools enabled (requires Firefox or Chrome plugin)
 vue-dev-tools:
