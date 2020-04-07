@@ -1,9 +1,9 @@
 [admin]
-password_salt=
-password_hash=
+password_salt = 
+password_hash = 
 
 [ganalytics]
-ua_id=
+ua_id = 
 
 [model]
-file=
+file = 
