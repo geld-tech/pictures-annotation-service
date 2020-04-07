@@ -100,8 +100,8 @@ def list():
 def identify_picture(filename):
     ''' Identify picture provided '''
     global config_file
-    
     settings = {'model': {'file': 'model.h5'}}
+
     if os.path.isfile(config_file):
         config = ConfigParser.ConfigParser()
         config.readfp(open(config_file))
