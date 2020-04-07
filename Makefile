@@ -115,7 +115,7 @@ local-dev-env: clean
 		set +x; \
 	fi
 	@echo "== Prepare H5 model =="
-	cp notebooks/cats_dogs_tlearn_basic_cnn.h5.zip $(SRV_DEV_ENV)
+	unzip notebooks/cats_dogs_tlearn_basic_cnn.h5.zip -d $(SRV_DEV_ENV)
 
 ## Ensure Vue application is built with DevTools enabled (requires Firefox or Chrome plugin)
 vue-dev-tools:
