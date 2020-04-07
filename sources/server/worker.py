@@ -105,6 +105,6 @@ def identify_picture(filename):
         config = ConfigParser.ConfigParser()
         config.readfp(open(config_file))
         if 'model' in config.sections():
-            settings['model'] = config.get('model', 'file')
+            settings['model']['file']= config.get('model', 'file')
     logger.info("Loading Model %s" % settings['model'])
     return "cat"
