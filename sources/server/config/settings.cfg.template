@@ -4,3 +4,6 @@ password_hash=
 
 [ganalytics]
 ua_id=
+
+[model]
+file=model.h5
