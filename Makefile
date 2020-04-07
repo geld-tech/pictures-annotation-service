@@ -176,6 +176,9 @@ webapp-settings:
 	@echo "" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "[ganalytics]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 	@echo "ua_id = 1234567" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "[model]" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
+	@echo "file = model.h5" >> $(SRV_DEV_ENV)/config/settings.cfg.dev
 
 ## Configure stub settings.cfg
 webapp-config: webapp-settings
