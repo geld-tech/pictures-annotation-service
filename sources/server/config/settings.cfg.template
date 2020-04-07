@@ -6,4 +6,4 @@ password_hash=
 ua_id=
 
 [model]
-file=model.h5
+file=
