@@ -106,3 +106,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+notebooks/cats_dogs_tlearn_basic_cnn.h5
