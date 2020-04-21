@@ -108,4 +108,12 @@ def identify_picture(filename):
         if 'model' in config.sections():
             settings['model']['file'] = config.get('model', 'file')
     logger.info("Loading Model %s" % settings['model'])
+
+    response = {
+        'predictions': {
+            'dog': '',
+            'cat': ''
+        }
+    }
+    #return jsonify(response)
     return "cat"
