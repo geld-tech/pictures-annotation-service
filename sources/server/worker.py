@@ -109,11 +109,23 @@ def identify_picture(filename):
             settings['model']['file'] = config.get('model', 'file')
     logger.info("Loading Model %s" % settings['model'])
 
+    #prediction = predict()
+    return "cat"
+
+def predict():
+    message = request.get_json(force=True)
+    encoded = message['image']
+    decoded = base64.b64decode(encoded)
+    image = Image.open(io.BytesIO(decoded))
+    processed_image = preprocess_image(image, target_size=(224, 224))
+    
+    prediction = model.predict(processed_image).tolist()
+
     response = {
-        'predictions': {
-            'dog': '',
-            'cat': ''
+        'prediction': {
+            'dog': prediction[0][0],
+            'cat': prediction[0][1]
         }
     }
-    #return jsonify(response)
-    return "cat"
+    return jsonify(response)
+
