@@ -112,15 +112,9 @@ def identify_picture(filename):
     #prediction = predict()
     return "cat"
 
-def predict():
-    message = request.get_json(force=True)
-    encoded = message['image']
-    decoded = base64.b64decode(encoded)
-    image = Image.open(io.BytesIO(decoded))
+def predict(image):
     processed_image = preprocess_image(image, target_size=(224, 224))
-    
     prediction = model.predict(processed_image).tolist()
-
     response = {
         'prediction': {
             'dog': prediction[0][0],
