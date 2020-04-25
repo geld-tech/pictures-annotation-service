@@ -3,12 +3,18 @@ import axios from 'axios'
 export function fetchData() {
   var offset = -( new Date().getTimezoneOffset()/60 )
   var headers = { headers: { offset: offset } }
-  return axios.get('/api/', headers).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.get('/api/', headers)
+    .then(response => 
+      { return response.data })
+    .catch(error =>
+      { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function postPayload(url, payload) {
   axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-  return axios.post(url, payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.post(url, payload)
+    .then(response => { return response.data })
+    .catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function postFiles(files) {
@@ -17,7 +23,9 @@ export function postFiles(files) {
     formData.append('files', files[i]);
   }
   axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
-  return axios.post('/upload/', formData).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.post('/upload/', formData)
+    .then(response => { return response.data })
+    .catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function storeAdminPassword(password) {
@@ -28,7 +36,9 @@ export function storeAdminPassword(password) {
 export function storeGanalytics(uaid) {
   var payload = { uaid: uaid }
   axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-  return axios.post('/setup/ganalytics/', payload).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.post('/setup/ganalytics/', payload)
+    .then(response => { return response.data })
+    .catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function authenticate(password) {
@@ -41,9 +51,13 @@ export function deauthenticate() {
 }
 
 export function getConfig() {
-  return axios.get('/setup/config/').then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.get('/setup/config/')
+    .then(response => { return response.data })
+    .catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
 
 export function getTaskStatus(taskId) {
-  return axios.get('/tasks?task_id=' + taskId).then(response => { return response.data }).catch(error => { /* console.error(error); */ return Promise.reject(error) })
+  return axios.get('/tasks?task_id=' + taskId)
+    .then(response => { return response.data })
+    .catch(error => { /* console.error(error); */ return Promise.reject(error) })
 }
