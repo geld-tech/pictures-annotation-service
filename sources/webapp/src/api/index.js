@@ -4,7 +4,7 @@ export function fetchData() {
   var offset = -( new Date().getTimezoneOffset()/60 )
   var headers = { headers: { offset: offset } }
   return axios.get('/api/', headers)
-    .then(response => 
+    .then(response =>
       { return response.data })
     .catch(error =>
       { /* console.error(error); */ return Promise.reject(error) })
