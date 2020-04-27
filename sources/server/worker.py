@@ -111,15 +111,3 @@ def identify_picture(filename):
 
     #prediction = predict()
     return "cat"
-
-def predict(image):
-    processed_image = preprocess_image(image, target_size=(224, 224))
-    prediction = model.predict(processed_image).tolist()
-    response = {
-        'prediction': {
-            'dog': prediction[0][0],
-            'cat': prediction[0][1]
-        }
-    }
-    return jsonify(response)
-
